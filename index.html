@@ -212,11 +212,23 @@
             border: 1px solid rgba(148, 163, 184, 0.6);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
             color: var(--text-main);
         }
 
+        /* Ny bund-sektion, der altid ligger i bunden */
+        .package-bottom {
+            margin-top: auto;              /* skubber hele blokken ned */
+            display: flex;
+            flex-direction: column;
+            gap: 4px;                      /* lille afstand mellem pris/footer/knap */
+        }
+
+        .package-bottom .CTA-BTN {
+            margin-top: 10px;
+            display: inline-block;
+            text-align: center;
+        }
+        
         .package:hover {
             transform: translateY(-5px);
             box-shadow: 0 26px 60px rgba(15, 23, 42, 0.25);
@@ -425,7 +437,7 @@
             <ul class="packages">
                 <!-- Interiør -->
                 <li class="package">
-                    <div>
+                    <div class="indhold">
                         <div class="package-header">
                             <h3>Interiør</h3>
                         </div>
@@ -441,17 +453,18 @@
                             <li>Pudsning af vinduer &amp; spejle indvendigt</li>
                         </ol>
                     </div>
-                    <div>
-                        <div class="package-price">Pris: 899,-</div>
-                        <div class="package-footer">Anbefales hvis kabinen trænger til et nyt udtryk og en grundig opfriskning.</div>
+                    <div class="package-bottom">
+                        <div class="package-price">Pris: 1.499,-</div>
+                        <div class="package-footer">
+                            Ideel som grundig klargøring eller før salg/levering af bilen.
+                        </div>
+                        <a href="booking.html" class="CTA-BTN">Book nu</a>
                     </div>
-
-                    <a href="booking.html" class="CTA-BTN" style="margin: 15px 10px 0 10px; display:inline-block; text-align:center;">Book nu</a>
                 </li>
 
                 <!-- Eksteriør -->
                 <li class="package">
-                    <div>
+                    <div class="indhold">
                         <div class="package-header">
                             <h3>Eksteriør</h3>
                         </div>
@@ -466,17 +479,18 @@
                             <li>Ruder &amp; spejle pudses udvendigt</li>
                         </ol>
                     </div>
-                    <div>
-                        <div class="package-price">Pris: 799,-</div>
-                        <div class="package-footer">Perfekt til dig, der vil have bilen til at fremstå velholdt og præsentabel udvendigt.</div>
+                    <div class="package-bottom">
+                        <div class="package-price">Pris: 1.499,-</div>
+                        <div class="package-footer">
+                            Ideel som grundig klargøring eller før salg/levering af bilen.
+                        </div>
+                        <a href="booking.html" class="CTA-BTN">Book nu</a>
                     </div>
-
-                    <a href="booking.html" class="CTA-BTN" style="margin: 15px 10px 0 10px; display:inline-block; text-align:center;">Book nu</a>
                 </li>
 
                 <!-- Komplet -->
                 <li class="package">
-                    <div>
+                    <div class="indhold">
                         <div class="package-header">
                             <h3>Komplet</h3>
                         </div>
@@ -488,13 +502,13 @@
                             <li>Alt fra Eksteriør</li>
                         </ol>
                     </div>
-                    <div>
+                    <div class="package-bottom">
                         <div class="package-price">Pris: 1.499,-</div>
-                        <div class="package-footer">Ideel som grundig klargøring eller før salg/levering af bilen.</div>
+                        <div class="package-footer">
+                            Ideel som grundig klargøring eller før salg/levering af bilen.
+                        </div>
+                        <a href="booking.html" class="CTA-BTN">Book nu</a>
                     </div>
-
-                    <a href="booking.html" class="CTA-BTN" style="margin: 15px 10px 0 10px; display:inline-block; text-align:center;">Book nu</a>
-                </li>
             </ul>
         </section>
 
