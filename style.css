@@ -37,10 +37,6 @@ a {
     text-decoration: none;
 }
 
-a:hover {
-    text-decoration: underline;
-}
-
 .page {
     min-height: 100vh;
     display: flex;
