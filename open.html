@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="logo_hv.ico">
+    <title>Daily Autocare</title>
+
+    <!-- Samme font som på forsiden -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0b0c10;
+            --bg-dark-alt: #1f2833;
+            --card-bg: #f8fafc;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --accent: #76ABAE;
+            --accent-soft: rgba(118, 171, 174, 0.12);
+            --border-subtle: rgba(15, 23, 42, 0.08);
+            --radius-lg: 18px;
+            --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            min-height: 100%;
+        }
+
+        body {
+            font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
+            color: #e5e7eb;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header / Navigation – samme som index-side */
+        header {
+            border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+            backdrop-filter: blur(18px);
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0));
+        }
+
+        .nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 18px 20px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 20%, #ffffff 0, #e5e7eb 26%, #111827 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            color: #020617;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+        }
+
+        .brand-text-main {
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            font-size: 18px;
+        }
+
+        .brand-text-sub {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: #94a3b8;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-ul{
+            list-style-type: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav-ul li {
+            padding-bottom: 5px;
+            transition: ease 0.2s;
+        }
+
+        .nav-ul li:hover {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 3px;
+        }
+
+        .nav-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            color: #e5e7eb;
+        }
+
+        .nav-phone {
+            font-size: 13px;
+            color: #e5e7eb;
+            opacity: 0.9;
+        }
+
+        /* HOVEDINDHOLD – ÅBNINGSTIDER */
+
+        main {
+            flex: 1;
+        }
+
+        .hours-section {
+            max-width: 1100px;
+            margin: 24px auto 40px;
+            padding: 0 20px 40px;
+        }
+
+        .hours-header {
+            margin-bottom: 24px;
+        }
+
+        .hours-kicker {
+            font-size: 12px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #9ca3af;
+            margin-bottom: 8px;
+        }
+
+        .hours-header h1 {
+            font-size: clamp(26px, 3.4vw, 32px);
+            margin-bottom: 8px;
+        }
+
+        .hours-header p {
+            font-size: 14px;
+            color: #cbd5f5;
+            max-width: 520px;
+            line-height: 1.5;
+        }
+
+        .hours-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+            gap: 22px;
+            margin-top: 16px;
+        }
+
+        .hours-card,
+        .info-card {
+            background: radial-gradient(circle at top left, rgba(241, 245, 249, 1), rgba(226, 232, 240, 1));
+            border-radius: 22px;
+            padding: 18px 18px 20px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            color: var(--text-main);
+        }
+
+        .hours-card h2,
+        .info-card h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .hours-note {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .hours-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .hours-table tbody tr {
+            border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+        }
+
+        .hours-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .hours-table td {
+            padding: 7px 4px;
+        }
+
+        .hours-table td:first-child {
+            font-weight: 500;
+            width: 40%;
+        }
+
+        .hours-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            padding: 4px 9px;
+            border-radius: 999px;
+            border: 1px solid rgba(22, 163, 74, 0.6);
+            background: rgba(22, 163, 74, 0.06);
+            color: #166534;
+            margin-top: 10px;
+        }
+
+        .hours-tag-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: #22c55e;
+        }
+
+        .info-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .info-list {
+            list-style-type: none;
+            margin-top: 6px;
+        }
+
+        .info-list li {
+            font-size: 13px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            color: var(--text-main);
+        }
+
+        .info-bullet {
+            margin-top: 4px;
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: var(--accent);
+        }
+
+        .info-highlight {
+            margin-top: 12px;
+            font-size: 12px;
+            padding: 9px 10px;
+            border-radius: 14px;
+            background: rgba(15, 23, 42, 0.03);
+            border: 1px dashed rgba(148, 163, 184, 0.7);
+            color: var(--text-muted);
+        }
+
+        .info-highlight strong {
+            color: var(--text-main);
+        }
+
+        .hours-cta {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .CTA-BTN {
+            position: relative;
+            overflow: hidden;
+            border: none;
+            border-radius: 999px;
+            padding: 12px 26px;
+            font-size: 14px;
+            font-weight: 500;
+            /* background: radial-gradient(circle at 0 0, #e5e7eb 0, #d1d5db 25%, #111827 100%); */
+            /* color: #020617; */
+            border: 2px solid var(--accent);
+            background-color: transparent;
+            color: var(--accent);
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+        }
+
+        .CTA-BTN:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 22px 45px rgba(15, 23, 42, 0.32);
+            /* background: radial-gradient(circle at 0 0, #ffffff 0, #e5e7eb 26%, #020617 100%); */
+            background: var(--accent);
+            color: black;
+        }
+
+        .CTA-BTN:active {
+            transform: translateY(0px) scale(0.99);
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.4);
+        }
+
+        .hours-cta-text {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .hours-cta-text strong {
+            color: var(--text-main);
+        }
+
+        /* Footer – samme stil som på forsiden */
+        footer {
+            border-top: 1px solid rgba(30, 64, 175, 0.35);
+            padding: 18px 20px 20px;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.82));
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .footer-left h3,
+        .footer-right h3 {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #e5e7eb;
+        }
+
+        .footer-left ul,
+        .footer-right ul {
+            list-style-type: none;
+        }
+
+        .footer-left li,
+        .footer-right li {
+            font-size: 13px;
+            color: #9ca3af;
+            margin-bottom: 6px;
+        }
+
+        .footer-left a {
+            color: #e5e7eb;
+            text-decoration: none;
+            border-bottom: 1px dashed transparent;
+        }
+
+        .footer-left a:hover {
+            border-bottom-color: rgba(148, 163, 184, 0.8);
+        }
+
+        .footer-meta {
+            margin-top: 8px;
+            font-size: 11px;
+            color: #6b7280;
+        }
+
+        /* Responsivitet */
+        @media (max-width: 900px) {
+            .nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hours-layout {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .hours-card,
+            .info-card {
+                border-radius: 18px;
+                padding: 16px 14px 18px;
+            }
+
+            .footer-inner {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+
+    <header>
+        <div class="nav">
+            <div class="brand">
+                <img src="logo_hv.png" alt="Daily Autocare logo" style="width: 65px;">
+                <!-- <div class="brand-logo">DA</div> -->
+                <div>
+                    <div class="brand-text-main">Daily Autocare</div>
+                    <div class="brand-text-sub">Mobil bilpleje · Sjælland</div>
+                </div>
+            </div>
+
+            <div class="nav-right">
+                <ul class="nav-ul">
+                    <li><a href="index.html" style="text-decoration: none;">Forside</a></li>
+                    <li><a href="open.html" style="text-decoration: none;">Åbningstider</a></li>
+                    <li><a href="portfolio.html" style="text-decoration: none;">Portefølje</a></li>
+                    <li><a href="kontakt.html" style="text-decoration: none;">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hours-section">
+            <div class="hours-header">
+                <div class="hours-kicker">Åbningstider</div>
+                <h1>Fleksible tider – tilpasset din hverdag.</h1>
+                <p>
+                    Daily Autocare er en mobil bilplejeservice, hvor tidsrummet for klargøring tilpasses 
+                    din kalender. Nedenfor finder du de generelle åbningstider og muligheder for særskilte aftaler.
+                </p>
+            </div>
+
+            <div class="hours-layout">
+                <!-- Kort med konkrete åbningstider -->
+                <article class="hours-card">
+                    <h2 style="margin-top: 20px; margin-bottom: 5px;">Åbningstider</h2>
+
+                    <table class="hours-table">
+                        <tbody>
+                            <tr>
+                                <td>Mandag – fredag</td>
+                                <td>Efter nærmere aftale</td>
+                            </tr>
+                            <tr>
+                                <td>Lørdag - søndag</td>
+                                <td>Efter nærmere aftale</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2 style="margin-top: 20px; margin-bottom: 5px;">Telefon tider</h2>
+                    <table class="hours-table">
+                        <tbody>
+                            <tr>
+                                <td>Mandag – fredag</td>
+                                <td>08.00 - 20.00</td>
+                            </tr>
+                            <tr>
+                                <td>Lørdag - søndag</td>
+                                <td>08.00 - 18.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="hours-cta">
+                        <button class="CTA-BTN">Book tid</button>
+                        <div class="hours-cta-text">
+                            eller kontakt os direkte på <strong>(+45) 25 70 59 15</strong> for en skræddersyet aftale.
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Info-kort / forklaring -->
+                <article class="info-card">
+                    <h2>Praktisk information</h2>
+                    <p>
+                        Da Daily Autocare er en fleksibel, mobil løsning, kan der i mange tilfælde 
+                        laves individuelle aftaler uden for standardtiderne.
+                    </p>
+
+                    <ul class="info-list">
+                        <li>
+                            <span class="info-bullet"></span>
+                            <span>
+                                <strong>Booking på forhånd</strong><br>
+                                For at sikre god planlægning anbefales det at booke tid i god tid, 
+                                særligt til weekendklargøringer.
+                            </span>
+                        </li>
+                        <li>
+                            <span class="info-bullet"></span>
+                            <span>
+                                <strong>Særlige ønsker</strong><br>
+                                Har du specifikke krav, tidsønsker eller flere biler på samme adresse, 
+                                aftales dette individuelt ved booking.
+                            </span>
+                        </li>
+                        <li>
+                            <span class="info-bullet"></span>
+                            <span>
+                                <strong>Aflysning & ombooking</strong><br>
+                                Aflysning eller flytning af tid bedes så vidt muligt ske senest 24 timer 
+                                før den aftalte klargøring.
+                            </span>
+                        </li>
+                    </ul>
+
+                    <div class="info-highlight">
+                        <strong>Bemærk:</strong> Daily Autocare er ikke momsregistreret. 
+                        Alle priser er angivet uden moms i henhold til gældende regler.
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-left">
+                <h3>Følg Daily Autocare</h3>
+                <ul>
+                    <li>
+                        <a href="https://www.facebook.com/profile.php?id=61572717761781&mibextid=wwXIfr&rdid=NhCSBIRzTYrKN0bw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1AHHCY7PA7%2F%3Fmibextid%3DwwXIfr#" target="_blank">
+                            Facebook
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/_dailyautocare/?fbclid=IwY2xjawOZY5pleHRuA2FlbQIxMABicmlkETB3cXZTS29IRDUzTjVneUdOc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHnhtDJZWXDJ4D9Goy3TV7sUbZyv3tI7NH6KROc9yeE60EtROx1eDigRM9mKy_aem_o8ERIHpH-Yt99yxjuS1H7g#" target="_blank">
+                            Instagram
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.tiktok.com/@dailyautocare?fbclid=IwY2xjawOZY6hleHRuA2FlbQIxMABicmlkETB3cXZTS29IRDUzTjVneUdOc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHn1QgX8sGh_cRFL5AXYUjdnsr3IJfa_GdbjpNRMFKBBPJD8HQqrkqP5h0bOS_aem_ue5kcnACR5o8AuetZoggjQ" target="_blank">
+                            TikTok
+                        </a>
+                    </li>
+                </ul>
+                <div class="footer-meta">
+                    © Daily Autocare – Professionel mobil bilpleje.
+                </div>
+            </div>
+
+            <div class="footer-right">
+                <h3>Kontaktoplysninger</h3>
+                <ul>
+                    <li>Brandsbjergvej 133<br>2600 Glostrup</li>
+                    <li>Telefon: (+45) 25 70 59 15</li>
+                    <li>E-mail: kontakt@dailyautocare.dk</li>
+                </ul>
+                <div class="footer-meta">
+                    Har du spørgsmål til åbningstider eller ønsker en særskilt aftale, er du altid velkommen til at kontakte os.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+</body>
+</html>

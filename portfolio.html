@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="logo_hv.ico">
+    <title>Portefølje · Daily Autocare</title>
+
+    <!-- Samme font som på de andre sider -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0b0c10;
+            --bg-dark-alt: #1f2833;
+            --card-bg: #f8fafc;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --accent: #76ABAE;
+            --accent-soft: rgba(118, 171, 174, 0.12);
+            --border-subtle: rgba(15, 23, 42, 0.08);
+            --radius-lg: 18px;
+            --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            min-height: 100%;
+        }
+
+        body {
+            font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
+            color: #e5e7eb;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header / Navigation – samme setup som på de andre sider */
+        header {
+            border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+            backdrop-filter: blur(18px);
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0));
+        }
+
+        .nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 18px 20px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 20%, #ffffff 0, #e5e7eb 26%, #111827 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            color: #020617;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+        }
+
+        .brand-text-main {
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            font-size: 18px;
+        }
+
+        .brand-text-sub {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: #94a3b8;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-ul{
+            list-style-type: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav-ul li {
+            padding-bottom: 5px;
+            transition: ease 0.2s;
+        }
+
+        .nav-ul li:hover {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 3px;
+        }
+
+        .nav-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            color: #e5e7eb;
+        }
+
+        .nav-phone {
+            font-size: 13px;
+            color: #e5e7eb;
+            opacity: 0.9;
+        }
+
+        /* Hovedindhold – portefølje */
+
+        main {
+            flex: 1;
+        }
+
+        .portfolio-section {
+            max-width: 1100px;
+            margin: 24px auto 40px;
+            padding: 0 20px 40px;
+        }
+
+        .portfolio-header {
+            margin-bottom: 24px;
+        }
+
+        .portfolio-kicker {
+            font-size: 12px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #9ca3af;
+            margin-bottom: 8px;
+        }
+
+        .portfolio-header h1 {
+            font-size: clamp(26px, 3.4vw, 32px);
+            margin-bottom: 8px;
+        }
+
+        .portfolio-header p {
+            font-size: 14px;
+            color: #cbd5f5;
+            max-width: 600px;
+            line-height: 1.5;
+        }
+
+        .portfolio-filter {
+            margin-top: 16px;
+            margin-bottom: 12px;
+            font-size: 12px;
+            color: #9ca3af;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .filter-tag {
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            background: rgba(15, 23, 42, 0.2);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .portfolio-item {
+            background: radial-gradient(circle at top left, rgba(241, 245, 249, 1), rgba(226, 232, 240, 1));
+            border-radius: 22px;
+            padding: 12px 12px 14px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .portfolio-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .portfolio-item-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .portfolio-item-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-align: right;
+        }
+
+        .portfolio-images {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 6px;
+        }
+
+        .portfolio-image-wrapper {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #020617;
+            /* Fast format, men billedet tilpasses (vertikal/horisontal) */
+            aspect-ratio: 4 / 3; /* kan justeres til 3/2 eller 16/10 efter smag */
+            border: 1px solid rgba(15, 23, 42, 0.5);
+        }
+
+        .portfolio-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* gør at både vertikale og horisontale billeder fylder rammen pænt */
+            display: block;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .portfolio-image-wrapper:hover img {
+            transform: scale(1.05);
+            filter: brightness(1.05);
+        }
+
+        .portfolio-label {
+            position: absolute;
+            left: 8px;
+            bottom: 8px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            background: rgba(15, 23, 42, 0.7);
+            color: #e5e7eb;
+            backdrop-filter: blur(4px);
+        }
+
+        .portfolio-item-description {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .portfolio-item-tags {
+            margin-top: 4px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            font-size: 11px;
+        }
+
+        .portfolio-tag {
+            padding: 3px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            background: rgba(15, 23, 42, 0.02);
+        }
+
+        /* Footer – samme stil som på de andre sider */
+        footer {
+            border-top: 1px solid rgba(30, 64, 175, 0.35);
+            padding: 18px 20px 20px;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.82));
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .footer-left h3,
+        .footer-right h3 {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #e5e7eb;
+        }
+
+        .footer-left ul,
+        .footer-right ul {
+            list-style-type: none;
+        }
+
+        .footer-left li,
+        .footer-right li {
+            font-size: 13px;
+            color: #9ca3af;
+            margin-bottom: 6px;
+        }
+
+        .footer-left a {
+            color: #e5e7eb;
+            text-decoration: none;
+            border-bottom: 1px dashed transparent;
+        }
+
+        .footer-left a:hover {
+            border-bottom-color: rgba(148, 163, 184, 0.8);
+        }
+
+        .footer-meta {
+            margin-top: 8px;
+            font-size: 11px;
+            color: #6b7280;
+        }
+
+        /* Responsivitet */
+        @media (max-width: 1000px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .footer-inner {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .portfolio-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .portfolio-item {
+                padding: 10px 10px 12px;
+                border-radius: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+
+    <header>
+        <div class="nav">
+            <div class="brand">
+                <img src="logo_hv.png" alt="Daily Autocare logo" style="width: 65px;">
+                <!-- <div class="brand-logo">DA</div> -->
+                <div>
+                    <div class="brand-text-main">Daily Autocare</div>
+                    <div class="brand-text-sub">Mobil bilpleje · Sjælland</div>
+                </div>
+            </div>
+
+            <div class="nav-right">
+                <ul class="nav-ul">
+                    <li><a href="index.html" style="text-decoration: none;">Forside</a></li>
+                    <li><a href="open.html" style="text-decoration: none;">Åbningstider</a></li>
+                    <li><a href="portfolio.html" style="text-decoration: none;">Portefølje</a></li>
+                    <li><a href="kontakt.html" style="text-decoration: none;">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="portfolio-section">
+            <div class="portfolio-header">
+                <div class="portfolio-kicker">Portefølje</div>
+                <h1>Før- og efterbilleder fra Daily Autocare.</h1>
+                <p>
+                    Her kan du se et udvalg af opgaver udført for kunder – fra hverdagsbiler til mere krævende klargøringer. 
+                    Billederne giver et konkret indtryk af niveauet på både interiør og eksteriør.
+                </p>
+            </div>
+
+            <div class="portfolio-filter">
+                <span>Eksempler på:</span>
+                <span class="filter-tag">Interiør</span>
+                <span class="filter-tag">Eksteriør</span>
+                <span class="filter-tag">Komplet klargøring</span>
+                <span class="filter-tag">Før salg</span>
+            </div>
+
+            <div class="portfolio-grid">
+                <!-- ITEM 1 -->
+                <article class="portfolio-item">
+                    <div class="portfolio-item-header">
+                        <div class="portfolio-item-title">Komplet klargøring – familiebil</div>
+                        <div class="portfolio-item-meta">Glostrup · Komplet pakke</div>
+                    </div>
+
+                    <div class="portfolio-images">
+                        <figure class="portfolio-image-wrapper">
+                            <!-- Udskift med dit eget billede -->
+                            <img src="img/portfolio1-before.jpg" alt="Før klargøring – interiør i familiebil">
+                            <figcaption class="portfolio-label">Før</figcaption>
+                        </figure>
+                        <figure class="portfolio-image-wrapper">
+                            <!-- Udskift med dit eget billede -->
+                            <img src="img/portfolio1-after.jpg" alt="Efter klargøring – interiør i familiebil">
+                            <figcaption class="portfolio-label">Efter</figcaption>
+                        </figure>
+                    </div>
+
+                    <p class="portfolio-item-description">
+                        Dybrens og pleje af plast, grundig støvsugning samt rens af dørfalser gav kabinen et markant løft i både komfort og udtryk.
+                    </p>
+                    <div class="portfolio-item-tags">
+                        <span class="portfolio-tag">Interiør</span>
+                        <span class="portfolio-tag">Børnefamilie</span>
+                        <span class="portfolio-tag">Komplet</span>
+                    </div>
+                </article>
+
+                <!-- ITEM 2 -->
+                <article class="portfolio-item">
+                    <div class="portfolio-item-header">
+                        <div class="portfolio-item-title">Eksteriør – pendlerbil</div>
+                        <div class="portfolio-item-meta">Albertslund · Eksteriør</div>
+                    </div>
+
+                    <div class="portfolio-images">
+                        <figure class="portfolio-image-wrapper">
+                            <img src="img/portfolio2-before.jpg" alt="Før vask – beskidt lak og fælge">
+                            <figcaption class="portfolio-label">Før</figcaption>
+                        </figure>
+                        <figure class="portfolio-image-wrapper">
+                            <img src="img/portfolio2-after.jpg" alt="Efter vask – ren lak, skinnende fælge">
+                            <figcaption class="portfolio-label">Efter</figcaption>
+                        </figure>
+                    </div>
+
+                    <p class="portfolio-item-description">
+                        Forvask, kontaktvask og aftørring kombineret med fokus på fælge og ruder gjorde bilen klar til både hverdag og kundebesøg.
+                    </p>
+                    <div class="portfolio-item-tags">
+                        <span class="portfolio-tag">Eksteriør</span>
+                        <span class="portfolio-tag">Daglig brug</span>
+                    </div>
+                </article>
+
+                <!-- ITEM 3 -->
+                <article class="portfolio-item">
+                    <div class="portfolio-item-header">
+                        <div class="portfolio-item-title">Interiør – forberedelse til salg</div>
+                        <div class="portfolio-item-meta">Rødovre · Interiør</div>
+                    </div>
+
+                    <div class="portfolio-images">
+                        <figure class="portfolio-image-wrapper">
+                            <img src="img/portfolio3-before.jpg" alt="Før – slidt og støvet kabine">
+                            <figcaption class="portfolio-label">Før</figcaption>
+                        </figure>
+                        <figure class="portfolio-image-wrapper">
+                            <img src="img/portfolio3-after.jpg" alt="Efter – ren og præsentabel kabine">
+                            <figcaption class="portfolio-label">Efter</figcaption>
+                        </figure>
+                    </div>
+
+                    <p class="portfolio-item-description">
+                        Fokus på helhedsindtryk og detaljer, så bilen fremstår velholdt ved fremvisning og potentielt salgsforløb.
+                    </p>
+                    <div class="portfolio-item-tags">
+                        <span class="portfolio-tag">Interiør</span>
+                        <span class="portfolio-tag">Salgsklargøring</span>
+                    </div>
+                </article>
+
+                <!-- FLERE EKSEMPLER – du kan kopiere en portfolio-item blok og ændre billeder/tekst -->
+                <!--
+                <article class="portfolio-item">
+                    ...
+                </article>
+                -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-left">
+                <h3>Følg Daily Autocare</h3>
+                <ul>
+                    <li>
+                        <a href="https://www.facebook.com/profile.php?id=61572717761781&mibextid=wwXIfr&rdid=NhCSBIRzTYrKN0bw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1AHHCY7PA7%2F%3Fmibextid%3DwwXIfr#" target="_blank">
+                            Facebook
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/_dailyautocare/?fbclid=IwY2xjawOZY5pleHRuA2FlbQIxMABicmlkETB3cXZTS29IRDUzTjVneUdOc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHnhtDJZWXDJ4D9Goy3TV7sUbZyv3tI7NH6KROc9yeE60EtROx1eDigRM9mKy_aem_o8ERIHpH-Yt99yxjuS1H7g#" target="_blank">
+                            Instagram
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.tiktok.com/@dailyautocare?fbclid=IwY2xjawOZY6hleHRuA2FlbQIxMABicmlkETB3cXZTS29IRDUzTjVneUdOc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHn1QgX8sGh_cRFL5AXYUjdnsr3IJfa_GdbjpNRMFKBBPJD8HQqrkqP5h0bOS_aem_ue5kcnACR5o8AuetZoggjQ" target="_blank">
+                            TikTok
+                        </a>
+                    </li>
+                </ul>
+                <div class="footer-meta">
+                    © Daily Autocare – Professionel mobil bilpleje.
+                </div>
+            </div>
+
+            <div class="footer-right">
+                <h3>Kontaktoplysninger</h3>
+                <ul>
+                    <li>Brandsbjergvej 133<br>2600 Glostrup</li>
+                    <li>Telefon: (+45) 25 70 59 15</li>
+                    <li>E-mail: kontakt@dailyautocare.dk</li>
+                </ul>
+                <div class="footer-meta">
+                    Har du spørgsmål til klargøringen eller ønsker at høre mere, er du altid velkommen til at kontakte os.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+</body>
+</html>

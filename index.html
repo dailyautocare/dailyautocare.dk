@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="logo_hv.ico">
+    <title>Daily Autocare</title>
+
+    <!-- Moderne font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0b0c10;
+            --bg-dark-alt: #1f2833;
+            --card-bg: #f8fafc;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --accent: #76ABAE;
+            --accent-soft: rgba(118, 171, 174, 0.12);
+            --border-subtle: rgba(15, 23, 42, 0.08);
+            --radius-lg: 18px;
+            --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            min-height: 100%;
+        }
+
+        body {
+            font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
+            color: #e5e7eb;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header / Hero */
+        header {
+            border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+            backdrop-filter: blur(18px);
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0));
+        }
+
+        .nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 18px 20px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 20%, #ffffff 0, #e5e7eb 26%, #111827 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            color: #020617;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+        }
+
+        .brand-text-main {
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            font-size: 18px;
+        }
+
+        .brand-text-sub {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: #94a3b8;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-ul{
+            list-style-type: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav-ul li {
+            padding-bottom: 5px;
+            transition: ease 0.2s;
+        }
+
+        .nav-ul li:hover {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 3px;
+        }
+
+        .nav-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            color: #e5e7eb;
+        }
+
+        .nav-phone {
+            font-size: 13px;
+            color: #e5e7eb;
+            opacity: 0.9;
+        }
+
+        .hero {
+            max-width: 1100px;
+            margin: 18px auto 40px;
+            padding: 0 20px 20px;
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+            gap: 32px;
+            align-items: center;
+        }
+
+        .hero-text-kicker {
+            font-size: 12px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #9ca3af;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 4.4vw, 40px);
+            line-height: 1.05;
+            margin-bottom: 14px;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            color: #cbd5f5;
+            max-width: 420px;
+            line-height: 1.5;
+            margin-bottom: 22px;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center;
+            font-size: 12px;
+            color: #9ca3af;
+            margin-bottom: 24px;
+        }
+
+        .hero-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-meta-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 999px;
+            background: #4ade80;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .CTA-BTN {
+            position: relative;
+            overflow: hidden;
+            border: none;
+            border-radius: 999px;
+            padding: 12px 26px;
+            font-size: 14px;
+            font-weight: 500;
+            /* background: radial-gradient(circle at 0 0, #e5e7eb 0, #d1d5db 25%, #111827 100%); */
+            /* color: #020617; */
+            border: 2px solid var(--accent);
+            background-color: transparent;
+            color: var(--accent);
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+        }
+
+        .CTA-BTN:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 22px 45px rgba(15, 23, 42, 0.32);
+            /* background: radial-gradient(circle at 0 0, #ffffff 0, #e5e7eb 26%, #020617 100%); */
+            background: var(--accent);
+            color: black;
+        }
+
+        .CTA-BTN:active {
+            transform: translateY(0px) scale(0.99);
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.4);
+        }
+
+        .CTA-secondary {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        .CTA-secondary strong {
+            color: #e5e7eb;
+            font-weight: 500;
+        }
+
+        .hero-card {
+            background: radial-gradient(circle at top left, rgba(148, 163, 184, 0.35), rgba(15, 23, 42, 1) 52%);
+            border-radius: 26px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            padding: 18px 18px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            box-shadow: 0 26px 60px rgba(15, 23, 42, 0.9);
+        }
+
+        .hero-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hero-card-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: #e5e7eb;
+            opacity: 0.9;
+        }
+
+        .hero-card-status {
+            font-size: 11px;
+            padding: 4px 9px;
+            border-radius: 999px;
+            background: rgba(22, 163, 74, 0.16);
+            color: #bbf7d0;
+            border: 1px solid rgba(34, 197, 94, 0.6);
+        }
+
+        .hero-card-pricing {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 16px;
+        }
+
+        .hero-price-main {
+            font-size: 26px;
+            font-weight: 600;
+            color: #e5e7eb;
+        }
+
+        .hero-price-main span {
+            font-size: 14px;
+            font-weight: 400;
+            color: #9ca3af;
+        }
+
+        .hero-price-note {
+            font-size: 12px;
+            color: #9ca3af;
+            max-width: 200px;
+        }
+
+        .hero-card-list-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: #9ca3af;
+        }
+
+        .hero-card-list {
+            list-style-type: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 14px;
+            margin-top: 6px;
+            font-size: 11px;
+            color: #e5e7eb;
+        }
+
+        .hero-card-list li::before {
+            content: "•";
+            margin-right: 6px;
+            color: var(--accent);
+        }
+
+        /* Pakker */
+        main {
+            flex: 1;
+        }
+
+        .forside-kicker {
+            font-size: 12px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #9ca3af;
+            margin-bottom: 8px;
+        }
+
+        .packages-section {
+            max-width: 1100px;
+            margin: 0 auto 0;
+            padding: 0 20px 40px;
+        }
+
+        .packages-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .packages-header-left h2 {
+            font-size: 22px;
+            margin-bottom: 4px;
+            margin-top: 20px;
+        }
+
+        .packages-header-left p {
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        .packages-header-right {
+            font-size: 12px;
+            color: #9ca3af;
+            text-align: right;
+        }
+
+        .packages {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+            list-style-type: none;
+        }
+
+        .package {
+            background: radial-gradient(circle at top left, rgba(241, 245, 249, 1), rgba(226, 232, 240, 1));
+            border-radius: 15px;
+            padding: 16px 16px 18px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+            color: var(--text-main);
+        }
+
+        .package:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 26px 60px rgba(15, 23, 42, 0.25);
+            border-color: var(--accent);
+        }
+
+        .package-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .package h3 {
+            font-size: 18px;
+        }
+
+        .package p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .package ol {
+            list-style-type: none;
+            margin-bottom: 10px;
+        }
+
+        .package ol li {
+            font-size: 13px;
+            padding: 7px 10px;
+            border-radius: 999px;
+            margin-bottom: 6px;
+            background: rgba(15, 23, 42, 0.02);
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .package ol li span {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .no-hover,
+        .no-hover:hover {
+            background: transparent;
+            border: none;
+        }
+
+        .package-price {
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .package-price span {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .package-footer {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* CTA-bånd under pakker */
+        .CTA-strip {
+            max-width: 1100px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+
+        .CTA-strip-inner {
+            border-radius: 15px;
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            background: radial-gradient(circle at left, rgba(248, 250, 252, 0.96), rgba(226, 232, 240, 0.96));
+            padding: 12px 18px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            box-shadow: var(--shadow-soft);
+            color: #020617;
+        }
+
+        .CTA-strip-text {
+            font-size: 13px;
+        }
+
+        .CTA-strip-text strong {
+            font-weight: 600;
+        }
+
+        .CTA-strip-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .CTA-strip-phone {
+            font-size: 12px;
+            color: #4b5563;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(30, 64, 175, 0.35);
+            padding: 18px 20px 20px;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.82));
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .footer-left h3,
+        .footer-right h3 {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #e5e7eb;
+        }
+
+        .footer-left ul,
+        .footer-right ul {
+            list-style-type: none;
+        }
+
+        .footer-left li,
+        .footer-right li {
+            font-size: 13px;
+            color: #9ca3af;
+            margin-bottom: 6px;
+        }
+
+        .footer-left a {
+            color: #e5e7eb;
+            text-decoration: none;
+            border-bottom: 1px dashed transparent;
+        }
+
+        .footer-left a:hover {
+            border-bottom-color: rgba(148, 163, 184, 0.8);
+        }
+
+        .footer-meta {
+            margin-top: 8px;
+            font-size: 11px;
+            color: #6b7280;
+        }
+
+        /* Responsivitet */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .hero-card {
+                order: -1;
+            }
+
+            .packages {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .footer-inner {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .packages-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .packages-header-right {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hero {
+                gap: 22px;
+            }
+
+            .packages {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .CTA-strip-inner {
+                border-radius: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+
+    <header>
+        <div class="nav">
+            <div class="brand">
+                <img src="logo_hv.png" alt="Daily Autocare logo" style="width: 65px;">
+                <!-- <div class="brand-logo">DA</div> -->
+                <div>
+                    <div class="brand-text-main">Daily Autocare</div>
+                    <div class="brand-text-sub">Mobil bilpleje · Sjælland</div>
+                </div>
+            </div>
+            <div class="nav-right">
+                <ul class="nav-ul">
+                    <li><a href="index.html" style="text-decoration: none;">Forside</a></li>
+                    <li><a href="open.html" style="text-decoration: none;">Åbningstider</a></li>
+                    <li><a href="portfolio.html" style="text-decoration: none;">Portefølje</a></li>
+                    <li><a href="kontakt.html" style="text-decoration: none;">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="hero">
+            <div>
+                <div class="forside-kicker">Forside</div>
+                <h1>Få din bil til at <span>skinne</span> – uden at forlade indkørslen.</h1>
+                <p class="hero-subtitle">
+                    Daily Autocare kommer til dig med professionelle produkter og en struktureret proces, 
+                    så du får en løsning, der både ser godt ud og føles tryg.
+                </p>
+
+                <div class="hero-meta">
+                    <span><span class="hero-meta-dot"></span> Professionel interiør- og eksteriørklargøring</span>
+                    <span>Fast pris pr. pakke · Ingen skjulte gebyrer</span>
+                </div>
+
+                <div class="hero-actions">
+                    <button class="CTA-BTN">Book klargøring nu</button>
+                    <div class="CTA-secondary">
+                        eller ring på <strong>(+45) 25 70 59 15</strong>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="hero-card">
+                <div class="hero-card-header">
+                    <div class="hero-card-title">Overblik over pakker</div>
+                </div>
+
+                <div class="hero-card-pricing">
+                    <div class="hero-price-main">
+                        Fra 799,-
+                    </div>
+                    <div class="hero-price-note">
+                        Vælg mellem Interiør, Eksteriør eller Komplet – tilpasset dig, der vil have en løsning med kvalitet i fokus.
+                    </div>
+                </div>
+
+                <div>
+                    <div class="hero-card-list-title">Typiske opgaver pr. besøg</div>
+                    <ul class="hero-card-list">
+                        <li>Grundig støvsugning</li>
+                        <li>Rens & pleje af plast</li>
+                        <li>Forvask & kontaktvask</li>
+                        <li>Vinduespuds inde & ude</li>
+                        <li>Dæk & fælge</li>
+                        <li>Komplet klargøring ved behov</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </header>
+
+    <main>
+        <section class="packages-section">
+            <div class="packages-header">
+                <div class="packages-header-left">
+                    <h2>Vælg den pakke, der passer til din bil</h2>
+                </div>
+                <div class="packages-header-right">
+                    Fra hverdagsbil til entusiastkøretøj – vi tilpasser processen til bilens stand og dine ønsker.
+                </div>
+            </div>
+
+            <ul class="packages">
+                <!-- Interiør -->
+                <li class="package">
+                    <div>
+                        <div class="package-header">
+                            <h3>Interiør</h3>
+                        </div>
+                        <p>
+                            Interiør klargøringspakken er designet til at give din bils kabine et markant løft i både 
+                            renlighed og udtryk.
+                        </p>
+                        <ol>
+                            <li>Grundig støvsugning af hele kabinen</li>
+                            <li>Rens af plast &amp; vinyl</li>
+                            <li>Pleje af plast &amp; vinyl</li>
+                            <li>Rens af dørkanter &amp; falser</li>
+                            <li>Pudsning af vinduer &amp; spejle indvendigt</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <div class="package-price">Pris: 899,-</div>
+                        <div class="package-footer">Anbefales hvis kabinen trænger til et nyt udtryk og en grundig opfriskning.</div>
+                    </div>
+
+                    <button class="CTA-BTN" style="margin: 15px 10px 0 10px">Book nu</button>
+                    
+                </li>
+
+                <!-- Eksteriør -->
+                <li class="package">
+                    <div>
+                        <div class="package-header">
+                            <h3>Eksteriør</h3>
+                        </div>
+                        <p>
+                            En komplet udvendig behandling, der genskaber bilens glans og forbedrer finishen markant.
+                        </p>
+                        <ol>
+                            <li>Dæk &amp; fælge</li>
+                            <li>Forvask af lakken</li>
+                            <li>Grundig kontaktvask</li>
+                            <li>Aftørring</li>
+                            <li>Ruder &amp; spejle pudses udvendigt</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <div class="package-price">Pris: 799,-</div>
+                        <div class="package-footer">Perfekt til dig, der vil have bilen til at fremstå velholdt og præsentabel udvendigt.</div>
+                    </div>
+
+                     <button class="CTA-BTN" style="margin: 15px 10px 0 10px">Book nu</button>
+
+                </li>
+
+                <!-- Komplet -->
+                <li class="package">
+                    <div>
+                        <div class="package-header">
+                            <h3>Komplet</h3>
+                        </div>
+                        <p>
+                            Den fulde pakke for dig, der ønsker et resultat, der både kan ses og mærkes – både inde og ude.
+                        </p>
+                        <ol>
+                            <li>Alt fra Interiør</li>
+                            <li>Alt fra Eksteriør</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <div class="package-price">Pris: 1.499,-</div>
+                        <div class="package-footer">Ideel som grundig klargøring eller før salg/levering af bilen.</div>
+                    </div>
+
+                    <button class="CTA-BTN" style="margin: 15px 10px 0 10px">Book nu</button>
+
+                </li>
+            </ul>
+        </section>
+
+        <section class="CTA-strip">
+            <div class="CTA-strip-inner">
+                <div class="CTA-strip-text">
+                    <strong>Spar 10% på din første booking</strong><br>
+                    Hos <span>Daily Autocare</span>, giver vi 10% rabat, første gang du booker en klargøring.
+                </div>
+            </div>
+        </section>
+
+        <section class="CTA-strip">
+            <div class="CTA-strip-inner">
+                <div class="CTA-strip-text">
+                    <strong>Er det tid til at få bilen til at skinne igen?</strong><br>
+                    Book en klargøring hos Daily Autocare – vi kommer til dig og sørger for resten.
+                </div>
+                <div class="CTA-strip-actions">
+                    <button class="CTA-BTN">Book nu</button>
+                    <div class="CTA-strip-phone">
+                        Har du spørgsmål? Skriv til <strong>kontakt@dailyautocare.dk</strong> eller ring på <strong>(+45) 25 70 59 15</strong>.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-left">
+                <h3>Følg Daily Autocare</h3>
+                <ul>
+                    <li>
+                        <a href="https://www.facebook.com/profile.php?id=61572717761781&mibextid=wwXIfr&rdid=NhCSBIRzTYrKN0bw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1AHHCY7PA7%2F%3Fmibextid%3DwwXIfr#" target="_blank">
+                            Facebook
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/_dailyautocare/?fbclid=IwY2xjawOZY5pleHRuA2FlbQIxMABicmlkETB3cXZTS29IRDUzTjVneUdOc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHnhtDJZWXDJ4D9Goy3TV7sUbZyv3tI7NH6KROc9yeE60EtROx1eDigRM9mKy_aem_o8ERIHpH-Yt99yxjuS1H7g#" target="_blank">
+                            Instagram
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.tiktok.com/@dailyautocare?fbclid=IwY2xjawOZY6hleHRuA2FlbQIxMABicmlkETB3cXZTS29IRDUzTjVneUdOc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHn1QgX8sGh_cRFL5AXYUjdnsr3IJfa_GdbjpNRMFKBBPJD8HQqrkqP5h0bOS_aem_ue5kcnACR5o8AuetZoggjQ" target="_blank">
+                            TikTok
+                        </a>
+                    </li>
+                </ul>
+                <div class="footer-meta">
+                    © Daily Autocare – Professionel mobil bilpleje.
+                </div>
+            </div>
+
+            <div class="footer-right">
+                <h3>Kontaktoplysninger</h3>
+                <ul>
+                    <li>Brandsbjergvej 133<br>2600 Glostrup</li>
+                    <li>Telefon: (+45) 25 70 59 15</li>
+                    <li>E-mail: kontakt@dailyautocare.dk</li>
+                </ul>
+                <div class="footer-meta">
+                    Har du særlige ønsker til klargøringen, er du velkommen til at skrive dem i forbindelse med booking, 
+                    så tilpasser vi løsningen.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+</body>
+</html>
