@@ -3,151 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="logo_hv.ico">
-    <title>Kontakt · Daily Autocare</title>
+    <link rel="icon" type="image/x-icon" href="assets/logo_hv.ico">
+    <title>Daily Autocare · Kontakt</title>
 
-    <!-- Samme font som på de andre sider -->
+    <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- Fælles CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Sidespecifik CSS -->
     <style>
-        :root {
-            --bg-dark: #0b0c10;
-            --bg-dark-alt: #1f2833;
-            --card-bg: #f8fafc;
-            --text-main: #111827;
-            --text-muted: #6b7280;
-            --accent: #76ABAE;
-            --accent-soft: rgba(118, 171, 174, 0.12);
-            --border-subtle: rgba(15, 23, 42, 0.08);
-            --radius-lg: 18px;
-            --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.25);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            min-height: 100%;
-        }
-
-        body {
-            font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
-            color: #e5e7eb;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .page {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Header / Navigation – samme setup som på de andre sider */
-        header {
-            border-bottom: 1px solid rgba(148, 163, 184, 0.18);
-            backdrop-filter: blur(18px);
-            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0));
-        }
-
-        .nav {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 18px 20px 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .brand-logo {
-            width: 40px;
-            height: 40px;
-            border-radius: 999px;
-            background: radial-gradient(circle at 30% 20%, #ffffff 0, #e5e7eb 26%, #111827 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 18px;
-            color: #020617;
-            border: 1px solid rgba(148, 163, 184, 0.5);
-        }
-
-        .brand-text-main {
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            font-size: 18px;
-        }
-
-        .brand-text-sub {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
-            color: #94a3b8;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nav-ul{
-            list-style-type: none;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .nav-ul li {
-            padding-bottom: 5px;
-            transition: ease 0.2s;
-        }
-
-        .nav-ul li:hover {
-            color: var(--accent);
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 3px;
-        }
-
-        .nav-tag {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: 4px 10px;
-            border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.6);
-            color: #e5e7eb;
-        }
-
-        .nav-phone {
-            font-size: 13px;
-            color: #e5e7eb;
-            opacity: 0.9;
-        }
-
-        /* Hovedindhold – kontakt */
-
         main {
             flex: 1;
         }
@@ -211,8 +79,6 @@
             margin-bottom: 14px;
         }
 
-        /* Formular */
-
         form {
             display: grid;
             grid-template-columns: minmax(0, 1fr);
@@ -273,39 +139,6 @@
             font-size: 11px;
             color: var(--text-muted);
         }
-
-        .CTA-BTN {
-            position: relative;
-            overflow: hidden;
-            border: none;
-            border-radius: 999px;
-            padding: 12px 26px;
-            font-size: 14px;
-            font-weight: 500;
-            /* background: radial-gradient(circle at 0 0, #e5e7eb 0, #d1d5db 25%, #111827 100%); */
-            /* color: #020617; */
-            border: 2px solid var(--accent);
-            background-color: transparent;
-            color: var(--accent);
-            cursor: pointer;
-            box-shadow: var(--shadow-soft);
-            transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
-        }
-
-        .CTA-BTN:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 22px 45px rgba(15, 23, 42, 0.32);
-            /* background: radial-gradient(circle at 0 0, #ffffff 0, #e5e7eb 26%, #020617 100%); */
-            background: var(--accent);
-            color: black;
-        }
-
-        .CTA-BTN:active {
-            transform: translateY(0px) scale(0.99);
-            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.4);
-        }
-
-        /* Kontaktinfo-kort */
 
         .contact-info-card p {
             font-size: 13px;
@@ -394,66 +227,7 @@
             color: var(--text-main);
         }
 
-        /* Footer – som de andre sider */
-
-        footer {
-            border-top: 1px solid rgba(30, 64, 175, 0.35);
-            padding: 18px 20px 20px;
-            background: linear-gradient(to top, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.82));
-        }
-
-        .footer-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-            gap: 20px;
-            align-items: flex-start;
-        }
-
-        .footer-left h3,
-        .footer-right h3 {
-            font-size: 14px;
-            margin-bottom: 8px;
-            color: #e5e7eb;
-        }
-
-        .footer-left ul,
-        .footer-right ul {
-            list-style-type: none;
-        }
-
-        .footer-left li,
-        .footer-right li {
-            font-size: 13px;
-            color: #9ca3af;
-            margin-bottom: 6px;
-        }
-
-        .footer-left a {
-            color: #e5e7eb;
-            text-decoration: none;
-            border-bottom: 1px dashed transparent;
-        }
-
-        .footer-left a:hover {
-            border-bottom-color: rgba(148, 163, 184, 0.8);
-        }
-
-        .footer-meta {
-            margin-top: 8px;
-            font-size: 11px;
-            color: #6b7280;
-        }
-
-        /* Responsivitet */
-
         @media (max-width: 900px) {
-            .nav {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
             .contact-layout {
                 grid-template-columns: minmax(0, 1fr);
             }
@@ -469,38 +243,15 @@
             .form-row-inline {
                 grid-template-columns: minmax(0, 1fr);
             }
-
-            .footer-inner {
-                grid-template-columns: minmax(0, 1fr);
-            }
         }
     </style>
+
+    <script src="js/layout.js" defer></script>
 </head>
 <body>
-
 <div class="page">
 
-    <header>
-        <div class="nav">
-            <div class="brand">
-                <img src="logo_hv.png" alt="Daily Autocare logo" style="width: 65px;">
-                <!-- <div class="brand-logo">DA</div> -->
-                <div>
-                    <div class="brand-text-main">Daily Autocare</div>
-                    <div class="brand-text-sub">Mobil bilpleje · Sjælland</div>
-                </div>
-            </div>
-
-            <div class="nav-right">
-                <ul class="nav-ul">
-                    <li><a href="index.html" style="text-decoration: none;">Forside</a></li>
-                    <li><a href="open.html" style="text-decoration: none;">Åbningstider</a></li>
-                    <li><a href="portfolio.html" style="text-decoration: none;">Portefølje</a></li>
-                    <li><a href="kontakt.html" style="text-decoration: none;">Kontakt</a></li>
-                </ul>
-            </div>
-        </div>
-    </header>
+    <div id="site-header"></div>
 
     <main>
         <section class="contact-section">
@@ -628,47 +379,7 @@
         </section>
     </main>
 
-    <footer>
-        <div class="footer-inner">
-            <div class="footer-left">
-                <h3>Følg Daily Autocare</h3>
-                <ul>
-                    <li>
-                        <a href="https://www.facebook.com/profile.php?id=61572717761781&mibextid=wwXIfr&rdid=NhCSBIRzTYrKN0bw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1AHHCY7PA7%2F%3Fmibextid%3DwwXIfr#" target="_blank">
-                            Facebook
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.instagram.com/_dailyautocare/?fbclid=IwY2xjawOZY5pleHRuA2FlbQIxMABicmlkETB3cXZTS29IRDUzTjVneUdOc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHnhtDJZWXDJ4D9Goy3TV7sUbZyv3tI7NH6KROc9yeE60EtROx1eDigRM9mKy_aem_o8ERIHpH-Yt99yxjuS1H7g#" target="_blank">
-                            Instagram
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.tiktok.com/@dailyautocare?fbclid=IwY2xjawOZY6hleHRuA2FlbQIxMABicmlkETB3cXZTS29IRDUzTjVneUdOc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHn1QgX8sGh_cRFL5AXYUjdnsr3IJfa_GdbjpNRMFKBBPJD8HQqrkqP5h0bOS_aem_ue5kcnACR5o8AuetZoggjQ" target="_blank">
-                            TikTok
-                        </a>
-                    </li>
-                </ul>
-                <div class="footer-meta">
-                    © Daily Autocare – Professionel mobil bilpleje.
-                </div>
-            </div>
-
-            <div class="footer-right">
-                <h3>Kontaktoplysninger</h3>
-                <ul>
-                    <li>Brandsbjergvej 133<br>2600 Glostrup</li>
-                    <li>Telefon: (+45) 25 70 59 15</li>
-                    <li>E-mail: kontakt@dailyautocare.dk</li>
-                </ul>
-                <div class="footer-meta">
-                    Har du spørgsmål til pakker, priser eller booking, er du altid velkommen til at kontakte os.
-                </div>
-            </div>
-        </div>
-    </footer>
-
+    <div id="site-footer"></div>
 </div>
-
 </body>
 </html>
