@@ -30,9 +30,9 @@ function markActiveNavLink() {
     const file = path.substring(path.lastIndexOf("/") + 1) || "index.html";
 
     let pageKey = "index";
-    if (file.includes("open")) pageKey = "open";
+    if (file.includes("aabningstider")) pageKey = "aabningstider";
     if (file.includes("kontakt")) pageKey = "kontakt";
-    if (file.includes("portfolio")) pageKey = "portfolio";
+    if (file.includes("galleri")) pageKey = "galleri";
 
     const links = document.querySelectorAll(".nav-ul a[data-page]");
     links.forEach(link => {
