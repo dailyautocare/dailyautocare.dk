@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="logo_hv.ico">
+    <title>Daily Autocare · Åbningstider</title>
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Fælles CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Sidespecifik CSS -->
+    <style>
+        main {
+            flex: 1;
+        }
+
+        .hours-section {
+            max-width: 1100px;
+            margin: 24px auto 40px;
+            padding: 0 20px 40px;
+        }
+
+        .hours-header {
+            margin-bottom: 24px;
+        }
+
+        .hours-kicker {
+            font-size: 12px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #9ca3af;
+            margin-bottom: 8px;
+        }
+
+        .hours-header h1 {
+            font-size: clamp(26px, 3.4vw, 32px);
+            margin-bottom: 8px;
+        }
+
+        .hours-header p {
+            font-size: 14px;
+            color: #cbd5f5;
+            max-width: 520px;
+            line-height: 1.5;
+        }
+
+        .hours-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+            gap: 22px;
+            margin-top: 16px;
+        }
+
+        .hours-card,
+        .info-card {
+            background: radial-gradient(circle at top left, rgba(241, 245, 249, 1), rgba(226, 232, 240, 1));
+            border-radius: 22px;
+            padding: 18px 18px 20px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            color: var(--text-main);
+        }
+
+        .hours-card h2,
+        .info-card h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .hours-note {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .hours-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .hours-table tbody tr {
+            border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+        }
+
+        .hours-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .hours-table td {
+            padding: 7px 4px;
+        }
+
+        .hours-table td:first-child {
+            font-weight: 500;
+            width: 40%;
+        }
+
+        .hours-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            padding: 4px 9px;
+            border-radius: 999px;
+            border: 1px solid rgba(22, 163, 74, 0.6);
+            background: rgba(22, 163, 74, 0.06);
+            color: #166534;
+            margin-top: 10px;
+        }
+
+        .hours-tag-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: #22c55e;
+        }
+
+        .info-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .info-list {
+            list-style-type: none;
+            margin-top: 6px;
+        }
+
+        .info-list li {
+            font-size: 13px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            color: var(--text-main);
+        }
+
+        .info-bullet {
+            margin-top: 4px;
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: var(--accent);
+        }
+
+        .info-highlight {
+            margin-top: 12px;
+            font-size: 12px;
+            padding: 9px 10px;
+            border-radius: 14px;
+            background: rgba(15, 23, 42, 0.03);
+            border: 1px dashed rgba(148, 163, 184, 0.7);
+            color: var(--text-muted);
+        }
+
+        .info-highlight strong {
+            color: var(--text-main);
+        }
+
+        .hours-cta {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hours-cta-text {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .hours-cta-text strong {
+            color: var(--text-main);
+        }
+
+        @media (max-width: 900px) {
+            .hours-layout {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .hours-card,
+            .info-card {
+                border-radius: 18px;
+                padding: 16px 14px 18px;
+            }
+        }
+    </style>
+
+    <script src="layout.js" defer></script>
+</head>
+<body>
+<div class="page">
+
+    <div id="site-header"></div>
+
+    <main>
+        <section class="hours-section">
+            <div class="hours-header">
+                <div class="hours-kicker">Åbningstider</div>
+                <h1>Fleksible tider – tilpasset din hverdag.</h1>
+                <p>
+                    Daily Autocare er en mobil bilplejeservice, hvor tidsrummet for klargøring tilpasses 
+                    din kalender. Nedenfor finder du de generelle åbningstider og muligheder for særskilte aftaler.
+                </p>
+            </div>
+
+            <div class="hours-layout">
+                <!-- Kort med konkrete åbningstider -->
+                <article class="hours-card">
+                    <h2 style="margin-top: 20px; margin-bottom: 5px;">Åbningstider</h2>
+
+                    <table class="hours-table">
+                        <tbody>
+                            <tr>
+                                <td>Mandag – fredag</td>
+                                <td>Efter nærmere aftale</td>
+                            </tr>
+                            <tr>
+                                <td>Lørdag - søndag</td>
+                                <td>Efter nærmere aftale</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2 style="margin-top: 20px; margin-bottom: 5px;">Telefon tider</h2>
+                    <table class="hours-table">
+                        <tbody>
+                            <tr>
+                                <td>Mandag – fredag</td>
+                                <td>08.00 - 20.00</td>
+                            </tr>
+                            <tr>
+                                <td>Lørdag - søndag</td>
+                                <td>08.00 - 18.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="hours-cta">
+                        <a href="booking.html" class="CTA-BTN">Book tid</a>
+                        <div class="hours-cta-text">
+                            eller kontakt os direkte på <strong>(+45) 25 70 59 15</strong> for en skræddersyet aftale.
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Info-kort / forklaring -->
+                <article class="info-card">
+                    <h2>Praktisk information</h2>
+                    <p>
+                        Da Daily Autocare er en fleksibel, mobil løsning, kan der i mange tilfælde 
+                        laves individuelle aftaler uden for standardtiderne.
+                    </p>
+
+                    <ul class="info-list">
+                        <li>
+                            <span class="info-bullet"></span>
+                            <span>
+                                <strong>Booking på forhånd</strong><br>
+                                For at sikre god planlægning anbefales det at booke tid i god tid, 
+                                særligt til weekendklargøringer.
+                            </span>
+                        </li>
+                        <li>
+                            <span class="info-bullet"></span>
+                            <span>
+                                <strong>Særlige ønsker</strong><br>
+                                Har du specifikke krav, tidsønsker eller flere biler på samme adresse, 
+                                aftales dette individuelt ved booking.
+                            </span>
+                        </li>
+                        <li>
+                            <span class="info-bullet"></span>
+                            <span>
+                                <strong>Aflysning & ombooking</strong><br>
+                                Aflysning eller flytning af tid bedes så vidt muligt ske senest 24 timer 
+                                før den aftalte klargøring.
+                            </span>
+                        </li>
+                    </ul>
+
+                    <div class="info-highlight">
+                        <strong>Bemærk:</strong> Daily Autocare er ikke momsregistreret. 
+                        Alle priser er angivet uden moms i henhold til gældende regler.
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+</div>
+</body>
+</html>
