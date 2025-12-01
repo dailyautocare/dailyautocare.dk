@@ -117,6 +117,7 @@
             background: #020617;
             aspect-ratio: 4 / 3;
             border: 1px solid rgba(15, 23, 42, 0.5);
+            cursor: zoom-in; /* Vis at billedet kan klikkes */
         }
 
         .portfolio-image-wrapper img {
@@ -165,6 +166,103 @@
             border-radius: 999px;
             border: 1px solid rgba(148, 163, 184, 0.7);
             background: rgba(15, 23, 42, 0.02);
+        }
+
+        /* Lightbox / klik-til-stort billede */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.85);
+            display: none; /* skjult som udgangspunkt */
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            padding: 20px;
+        }
+
+        .lightbox--open {
+            display: flex;
+        }
+
+        .lightbox-inner {
+            position: relative;
+            max-width: min(1000px, 100%);
+            max-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: calc(100vh - 80px);
+            border-radius: 16px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
+            object-fit: contain;
+            display: block;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            width: 32px;
+            height: 32px;
+            border-radius: 999px;
+            border: none;
+            background: rgba(15, 23, 42, 0.9);
+            color: #e5e7eb;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+        }
+
+        .lightbox-close:hover {
+            background: rgba(30, 64, 175, 0.9);
+        }
+
+        /* Pile til navigation */
+        .lightbox-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            border: none;
+            background: rgba(15, 23, 42, 0.9);
+            color: #e5e7eb;
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+        }
+
+        .lightbox-arrow:hover {
+            background: rgba(30, 64, 175, 0.9);
+        }
+
+        .lightbox-prev {
+            left: -55px;
+        }
+
+        .lightbox-next {
+            right: -55px;
+        }
+
+        @media (max-width: 650px) {
+            .lightbox-prev {
+                left: 10px;
+            }
+
+            .lightbox-next {
+                right: 10px;
+            }
         }
 
         @media (max-width: 1000px) {
@@ -221,83 +319,130 @@
 
                     <div class="portfolio-images">
                         <figure class="portfolio-image-wrapper">
-                            <img src="img/portfolio1-before.jpg" alt="Før klargøring – interiør i familiebil">
+                            <img src="galleri1før.webp" alt="Før klargøring – interiør i firmabil">
                             <figcaption class="portfolio-label">Før</figcaption>
                         </figure>
                         <figure class="portfolio-image-wrapper">
-                            <img src="img/portfolio1-after.jpg" alt="Efter klargøring – interiør i familiebil">
+                            <img src="galleri1efter.webp" alt="Efter klargøring – interiør i firmabil">
                             <figcaption class="portfolio-label">Efter</figcaption>
                         </figure>
                     </div>
 
                     <p class="portfolio-item-description">
-                        Dybrens og pleje af plast, grundig støvsugning samt rens af dørfalser gav kabinen et markant løft i både komfort og udtryk.
+                        Denne firmabil skulle gå fra en ansat til en anden, så den fik en rengøring indvendigt, så den blev klar til sin nye ejer.
                     </p>
                     <div class="portfolio-item-tags">
                         <span class="portfolio-tag">Interiør</span>
-                        <span class="portfolio-tag">Børnefamilie</span>
-                        <span class="portfolio-tag">Komplet</span>
+                        <span class="portfolio-tag">Firmabil</span>
                     </div>
                 </article>
 
-                <!-- ITEM 2 -->
-                <article class="portfolio-item">
-                    <div class="portfolio-item-header">
-                        <div class="portfolio-item-title">Eksteriør – pendlerbil</div>
-                        <div class="portfolio-item-meta">Albertslund · Eksteriør</div>
-                    </div>
-
-                    <div class="portfolio-images">
-                        <figure class="portfolio-image-wrapper">
-                            <img src="img/portfolio2-before.jpg" alt="Før vask – beskidt lak og fælge">
-                            <figcaption class="portfolio-label">Før</figcaption>
-                        </figure>
-                        <figure class="portfolio-image-wrapper">
-                            <img src="img/portfolio2-after.jpg" alt="Efter vask – ren lak, skinnende fælge">
-                            <figcaption class="portfolio-label">Efter</figcaption>
-                        </figure>
-                    </div>
-
-                    <p class="portfolio-item-description">
-                        Forvask, kontaktvask og aftørring kombineret med fokus på fælge og ruder gjorde bilen klar til både hverdag og kundebesøg.
-                    </p>
-                    <div class="portfolio-item-tags">
-                        <span class="portfolio-tag">Eksteriør</span>
-                        <span class="portfolio-tag">Daglig brug</span>
-                    </div>
-                </article>
-
-                <!-- ITEM 3 -->
-                <article class="portfolio-item">
-                    <div class="portfolio-item-header">
-                        <div class="portfolio-item-title">Interiør – forberedelse til salg</div>
-                        <div class="portfolio-item-meta">Rødovre · Interiør</div>
-                    </div>
-
-                    <div class="portfolio-images">
-                        <figure class="portfolio-image-wrapper">
-                            <img src="img/portfolio3-before.jpg" alt="Før – slidt og støvet kabine">
-                            <figcaption class="portfolio-label">Før</figcaption>
-                        </figure>
-                        <figure class="portfolio-image-wrapper">
-                            <img src="img/portfolio3-after.jpg" alt="Efter – ren og præsentabel kabine">
-                            <figcaption class="portfolio-label">Efter</figcaption>
-                        </figure>
-                    </div>
-
-                    <p class="portfolio-item-description">
-                        Fokus på helhedsindtryk og detaljer, så bilen fremstår velholdt ved fremvisning og potentielt salgsforløb.
-                    </p>
-                    <div class="portfolio-item-tags">
-                        <span class="portfolio-tag">Interiør</span>
-                        <span class="portfolio-tag">Salgsklargøring</span>
-                    </div>
-                </article>
+                <!-- Flere items kan kopieres herunder -->
             </div>
         </section>
     </main>
 
     <div id="site-footer"></div>
 </div>
+
+<!-- Lightbox markup -->
+<div class="lightbox" id="lightbox">
+    <div class="lightbox-inner">
+        <button class="lightbox-close" type="button" aria-label="Luk billede">&times;</button>
+        <button class="lightbox-arrow lightbox-prev" type="button" aria-label="Forrige billede">&#10094;</button>
+        <img src="" alt="" class="lightbox-img">
+        <button class="lightbox-arrow lightbox-next" type="button" aria-label="Næste billede">&#10095;</button>
+    </div>
+</div>
+
+<!-- Lightbox script -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = lightbox.querySelector(".lightbox-img");
+    const closeBtn = lightbox.querySelector(".lightbox-close");
+    const prevBtn = lightbox.querySelector(".lightbox-prev");
+    const nextBtn = lightbox.querySelector(".lightbox-next");
+
+    let currentGroup = [];
+    let currentIndex = 0;
+
+    function showImage(index) {
+        if (!currentGroup.length) return;
+
+        // Wrap rundt hvis man går forbi første/sidste
+        if (index < 0) {
+            index = currentGroup.length - 1;
+        } else if (index >= currentGroup.length) {
+            index = 0;
+        }
+
+        currentIndex = index;
+        const img = currentGroup[currentIndex];
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt || "";
+    }
+
+    function openLightbox(groupImages, clickedImg) {
+        currentGroup = groupImages;
+        currentIndex = groupImages.indexOf(clickedImg);
+        showImage(currentIndex);
+
+        lightbox.classList.add("lightbox--open");
+        document.body.style.overflow = "hidden"; // lås scroll bagved
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove("lightbox--open");
+        document.body.style.overflow = "";
+        lightboxImg.src = "";
+        lightboxImg.alt = "";
+        currentGroup = [];
+        currentIndex = 0;
+    }
+
+    // Klik på billeder i porteføljen
+    document.querySelectorAll(".portfolio-image-wrapper img").forEach((img) => {
+        img.addEventListener("click", () => {
+            const container = img.closest(".portfolio-images");
+            const groupImages = Array.from(container.querySelectorAll("img"));
+            openLightbox(groupImages, img);
+        });
+    });
+
+    // Pile-knapper
+    prevBtn.addEventListener("click", () => {
+        showImage(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener("click", () => {
+        showImage(currentIndex + 1);
+    });
+
+    // Luk på kryds
+    closeBtn.addEventListener("click", closeLightbox);
+
+    // Luk ved klik på overlay (men ikke når man klikker på selve billedet/inner)
+    lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+
+    // Tastatur: Esc lukker, venstre/højre bladrer
+    document.addEventListener("keydown", (e) => {
+        if (!lightbox.classList.contains("lightbox--open")) return;
+
+        if (e.key === "Escape") {
+            closeLightbox();
+        } else if (e.key === "ArrowLeft") {
+            showImage(currentIndex - 1);
+        } else if (e.key === "ArrowRight") {
+            showImage(currentIndex + 1);
+        }
+    });
+});
+</script>
+
 </body>
 </html>
