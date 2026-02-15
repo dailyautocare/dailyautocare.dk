@@ -642,8 +642,6 @@
         const subject = `Booking – ${packageChoice} – ${plate}`;
 
         const bodyLines = [
-          "Ny bookingforespørgsel fra Daily Autocare hjemmeside:",
-          "",
           `Navn: ${firstName} ${lastName}`,
           `E-mail: ${email}`,
           `Telefon: ${phone}`,
@@ -651,14 +649,14 @@
           `Bilens nummerplade: ${plate}`,
           "",
           `Valgt pakke: ${packageChoice}`,
-          `Pakkepris (estimat): ${formatPrice(packagePrice)},-`,
+          `Pakkepris: ${formatPrice(packagePrice)},-`,
           "",
           "Tilvalg:",
           selectedAddons.length ? `- ${selectedAddons.join("\n- ")}` : "(Ingen tilvalg valgt)",
-          `Tilvalg i alt (estimat): ${formatPrice(addonsTotal)},-`,
+          `Tilvalg i alt: ${formatPrice(addonsTotal)},-`,
           "",
           `Tidsforbrug (estimat): ${timeEstimate}`,
-          `Samlet estimat: ${formatPrice(grandTotal)},-`,
+          `Total: ${formatPrice(grandTotal)},-`,
           "",
           "Evt. besked fra kunden:",
           message || "(ingen besked angivet)",
