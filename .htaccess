@@ -1,9 +1,0 @@
-RewriteEngine On
-
-# Fjerner .html fra øvrige sider
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([^/]+)/?$ $1.html [L]
-
-# Standard forside
-DirectoryIndex forside.html
