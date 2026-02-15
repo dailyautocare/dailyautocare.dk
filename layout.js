@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function markActiveNavLink() {
     const path = window.location.pathname;
-    const file = path.substring(path.lastIndexOf("/") + 1) || "index.html";
+    const file = path.substring(path.lastIndexOf("/") + 1) || "forside.html";
 
     let pageKey = "index";
     if (file.includes("aabningstider")) pageKey = "aabningstider";

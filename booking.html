@@ -1,455 +1,852 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="logo_hv.ico">
-    <title>Daily Autocare · Booking</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="logo_hv.ico" />
+  <title>Booking | Daily Autocare</title>
+  <meta name="description" content="Book tid til klargøring/rengøring af din bil hos Daily Autocare Sjælland. For at få din bil til at stråle igen.">
 
-    <!-- Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Fælles CSS -->
-    <link rel="stylesheet" href="style.css">
+  <!-- Fælles CSS -->
+  <link rel="stylesheet" href="style.css">
 
-    <!-- Sidespecifik CSS -->
-    <style>
-        main {
-            flex: 1;
+  <!-- Sidespecifik CSS -->
+  <style>
+    main { flex: 1; }
+
+    .booking-section {
+      max-width: 1100px;
+      margin: 24px auto 40px;
+      padding: 0 20px 40px;
+    }
+
+    .booking-header { margin-bottom: 24px; }
+
+    .booking-header h1 {
+      font-size: clamp(26px, 3.4vw, 32px);
+      margin-bottom: 8px;
+    }
+
+    .booking-header p {
+      font-size: 14px;
+      color: #cbd5f5;
+      max-width: 560px;
+      line-height: 1.5;
+    }
+
+    .booking-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 24px;
+      margin-top: 18px;
+    }
+
+    .booking-card,
+    .booking-side-card {
+      background: radial-gradient(circle at top left, rgba(241, 245, 249, 1), rgba(226, 232, 240, 1));
+      border-radius: 22px;
+      padding: 18px 18px 20px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: var(--text-main);
+    }
+
+    .booking-card h2,
+    .booking-side-card h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .booking-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .form-row-inline {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text-main);
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      font-family: inherit;
+      font-size: 13px;
+      color: var(--text-main);
+      outline: none;
+      background: #f9fafb;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(118, 171, 174, 0.4);
+      background: #ffffff;
+    }
+
+    textarea { min-height: 120px; resize: vertical; }
+
+    .form-helper {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-main);
+      margin-top: 4px;
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      margin-top: 3px;
+      width: auto;
+    }
+
+    .checkbox-row a {
+      color: var(--text-main);
+      border-bottom: 1px dashed rgba(148, 163, 184, 0.8);
+      text-decoration: none;
+    }
+
+    .checkbox-row a:hover { border-bottom-style: solid; }
+
+    .form-footer {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .booking-side-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .booking-side-list {
+      list-style-type: none;
+      margin-top: 6px;
+      padding-left: 0;
+    }
+
+    .booking-side-list li {
+      font-size: 13px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: var(--text-main);
+    }
+
+    .booking-side-dot {
+      margin-top: 6px;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      flex: 0 0 6px;
+    }
+
+    .trustpilot-inline-link {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dashed transparent;
+    }
+
+    .trustpilot-inline-link:hover { border-bottom-color: var(--accent); }
+
+    /* Tilvalg UI – rettet layout + samlet sum */
+    #addons-wrap { margin-top: 10px; }
+
+    .addons-grid{
+      display:flex;
+      flex-wrap: wrap;
+      gap:10px;
+    }
+
+    .addon-item{
+      padding: 10px;
+      border-radius:14px;
+      border:1px solid rgba(148,163,184,0.7);
+      background:#ffffff;
+      min-width: 260px;
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      justify-content:space-between;
+    }
+
+    .addon-left{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+
+    .addon-left input[type="checkbox"]{
+      width:auto;
+      margin-top: 3px;
+      flex: 0 0 auto;
+    }
+
+    .addon-title{
+      font-size:13px;
+      color:var(--text-main);
+      line-height:1.35;
+      word-break: break-word;
+    }
+
+    .addon-price{
+      font-size:12px;
+      color:var(--text-muted);
+      margin-top:2px;
+      white-space: normal;
+    }
+
+    .addon-qty{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      flex: 0 0 140px;
+    }
+
+    .addon-qty label{
+      margin:0;
+      font-size:12px;
+      color:var(--text-muted);
+      font-weight:500;
+    }
+
+    .addon-qty input{
+      padding:7px 10px;
+    }
+
+    .summary-box{
+      margin-top: 10px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.03);
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    .summary-box strong{ color: var(--text-main); }
+
+    .summary-rows{
+      display:grid;
+      gap:6px;
+      margin-top: 8px;
+    }
+
+    .summary-row{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .summary-total{
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(148, 163, 184, 0.5);
+      display:flex;
+      justify-content:space-between;
+      font-size: 13px;
+    }
+
+    .summary-total strong{
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .booking-layout { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    @media (max-width: 650px) {
+      .booking-card,
+      .booking-side-card { border-radius: 18px; padding: 16px 14px 18px; }
+
+      .form-row-inline { grid-template-columns: minmax(0, 1fr); }
+
+      .addon-qty{
+        flex: 1 1 100%;
+      }
+      .addon-left{
+        min-width: 0;
+        flex: 1 1 100%;
+      }
+      .addon-item{
+        flex-direction:column;
+      }
+    }
+  </style>
+
+  <script src="layout.js" defer></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("booking-form");
+      if (!form) return;
+
+      const packageSelect = document.getElementById("package");
+      const addonsWrap = document.getElementById("addons-wrap");
+      const addonsContainer = document.getElementById("addons-container");
+      const addonsTotalEl = document.getElementById("addons-total");
+      const packagePriceEl = document.getElementById("package-price");
+      const grandTotalEl = document.getElementById("grand-total");
+      const totalTimeEl = document.getElementById("total-time");
+
+      // ====== TID: Basis pr. pakke (min/max i minutter) ======
+      // Tilpas disse til dine reelle estimater
+      const PACKAGE_TIMES = {
+        interior: { min: 90, max: 120 },
+        exterior: { min: 60,  max: 90  },
+        complete: { min: 180, max: 240 },
+      };
+
+      // ====== Tilvalg med pris + tid (min/max i minutter) ======
+      // checkbox: tid lægges til én gang
+      // qty: tid pr. enhed ganges med antal
+      const ADDONS = {
+        interior: [
+          { id: "stof_saeder", type: "qty", label: "Rens af sæder (Stof)", unitLabel: "sæder", price: 79, timeMin: 10, timeMax: 15 },
+          { id: "laeder_saeder", type: "qty", label: "Rens & pleje af læder (sæder)", unitLabel: "sæder", price: 99, timeMin: 10, timeMax: 15 },
+          { id: "dyrehaar", type: "checkbox", label: "Fjernelse af dyre hår", price: 295, timeMin: 30, timeMax: 60 },
+          { id: "hulrum", type: "checkbox", label: "Hulrums rengøring", price: 195, timeMin: 15, timeMax: 30 },
+          { id: "ekstra_beskidt", type: "checkbox", label: "Ekstra beskidt", price: 395, timeMin: 30, timeMax: 60 },
+          { id: "uheld", type: "checkbox", label: "Uheld (opkast eller lignende)", price: 495, timeMin: 30, timeMax: 45 },
+        ],
+        exterior: [
+          { id: "coating_forrude", type: "checkbox", label: "Rude coating – Forrude", price: 395, timeMin: 20, timeMax: 30 },
+          { id: "coating_sideruder", type: "qty", label: "Rude coating – Side ruder", unitLabel: "ruder", price: 195, timeMin: 10, timeMax: 15 },
+          { id: "coating_bagrude", type: "checkbox", label: "Rude coating – Bagrude", price: 295, timeMin: 20, timeMax: 30 },
+          { id: "coating_spejle", type: "checkbox", label: "Rude coating – 2 sidespejle", price: 195, timeMin: 10, timeMax: 15 },
+          { id: "coating_alt", type: "checkbox", label: "Alle ruder & 2 sidespejle", price: 1395, timeMin: 60, timeMax: 90 },
+        ]
+      };
+
+      function formatPrice(n) {
+        const num = Number(n) || 0;
+        return String(Math.round(num));
+      }
+
+      function parsePackagePrice(packageValue) {
+        const m = (packageValue || "").match(/\(([\d\.]+)\s*,-\)/);
+        if (!m) return 0;
+        return Number(m[1].replace(/\./g, "")) || 0;
+      }
+
+      function getPackageType(packageValue) {
+        const v = (packageValue || "").toLowerCase();
+        if (v.includes("interiør") || v.includes("interior")) return "interior";
+        if (v.includes("eksteriør") || v.includes("eksterior") || v.includes("udvendig")) return "exterior";
+        if (v.includes("komplet")) return "complete";
+        return "";
+      }
+
+      function getActiveAddonsList() {
+        const type = getPackageType(packageSelect.value);
+        if (type === "interior") return ADDONS.interior;
+        if (type === "exterior") return ADDONS.exterior;
+        if (type === "complete") return [...ADDONS.interior, ...ADDONS.exterior];
+        return [];
+      }
+
+      // ====== TID HELPERS ======
+      function formatHoursMinutes(totalMinutes) {
+        const m = Math.max(0, Math.round(Number(totalMinutes) || 0));
+        const h = Math.floor(m / 60);
+        const r = m % 60;
+
+        if (h <= 0) return `${r}min`;
+        if (r === 0) return `${h}t`;
+        return `${h}t ${r}min`;
         }
 
-        .booking-section {
-            max-width: 1100px;
-            margin: 24px auto 40px;
-            padding: 0 20px 40px;
+        function formatTimeRange(minMinutes, maxMinutes) {
+        const min = Math.max(0, Math.round(Number(minMinutes) || 0));
+        const max = Math.max(0, Math.round(Number(maxMinutes) || 0));
+
+        if (!min && !max) return "0min";
+        if (min === max) return formatHoursMinutes(min);
+
+        return `${formatHoursMinutes(min)} - ${formatHoursMinutes(max)}`;
         }
 
-        .booking-header {
-            margin-bottom: 24px;
-        }
+      function getPackageTimeRange() {
+        const type = getPackageType(packageSelect.value);
+        if (!type) return { min: 0, max: 0 };
+        const pkg = PACKAGE_TIMES[type];
+        if (!pkg) return { min: 0, max: 0 };
+        return { min: Number(pkg.min || 0), max: Number(pkg.max || 0) };
+      }
 
-        .booking-kicker {
-            font-size: 12px;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: #9ca3af;
-            margin-bottom: 8px;
-        }
+      function getSelectedAddonsTimeRange() {
+        const activeList = getActiveAddonsList();
+        const byId = Object.fromEntries(activeList.map(a => [a.id, a]));
 
-        .booking-header h1 {
-            font-size: clamp(26px, 3.4vw, 32px);
-            margin-bottom: 8px;
-        }
+        const checks = addonsContainer.querySelectorAll('input[type="checkbox"][data-addon-id]');
+        let minTotal = 0;
+        let maxTotal = 0;
 
-        .booking-header p {
-            font-size: 14px;
-            color: #cbd5f5;
-            max-width: 560px;
-            line-height: 1.5;
-        }
+        checks.forEach(ch => {
+          if (!ch.checked) return;
 
-        .booking-layout {
-            display: grid;
-            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-            gap: 24px;
-            margin-top: 18px;
-        }
+          const id = ch.dataset.addonId;
+          const addon = byId[id];
+          if (!addon) return;
 
-        .booking-card,
-        .booking-side-card {
-            background: radial-gradient(circle at top left, rgba(241, 245, 249, 1), rgba(226, 232, 240, 1));
-            border-radius: 22px;
-            padding: 18px 18px 20px;
-            box-shadow: var(--shadow-soft);
-            border: 1px solid rgba(148, 163, 184, 0.7);
-            color: var(--text-main);
-        }
+          const tMin = Number(addon.timeMin || 0);
+          const tMax = Number(addon.timeMax || 0);
 
-        .booking-card h2,
-        .booking-side-card h2 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        .booking-card p {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 14px;
-        }
-
-        form {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr);
-            gap: 10px;
-        }
-
-        .form-row-inline {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-            gap: 10px;
-        }
-
-        label {
-            font-size: 12px;
-            font-weight: 500;
-            display: block;
-            margin-bottom: 4px;
-            color: var(--text-main);
-        }
-
-        input,
-        textarea,
-        select {
-            width: 100%;
-            padding: 8px 10px;
-            border-radius: 10px;
-            border: 1px solid rgba(148, 163, 184, 0.8);
-            font-family: inherit;
-            font-size: 13px;
-            color: var(--text-main);
-            outline: none;
-            background: #f9fafb;
-        }
-
-        input:focus,
-        textarea:focus,
-        select:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 1px rgba(118, 171, 174, 0.4);
-            background: #ffffff;
-        }
-
-        textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .form-helper {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-bottom: 2px;
-        }
-
-        .checkbox-row {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            font-size: 12px;
-            color: var(--text-main);
-            margin-top: 4px;
-        }
-
-        .checkbox-row input[type="checkbox"] {
-            margin-top: 3px;
-            width: auto;
-        }
-
-        .checkbox-row a {
-            color: var(--text-main);
-            border-bottom: 1px dashed rgba(148, 163, 184, 0.8);
-            text-decoration: none;
-        }
-
-        .checkbox-row a:hover {
-            border-bottom-style: solid;
-        }
-
-        .form-footer {
-            margin-top: 8px;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 10px;
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
-        .booking-side-card p {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 10px;
-        }
-
-        .booking-side-list {
-            list-style-type: none;
-            margin-top: 6px;
-        }
-
-        .booking-side-list li {
-            font-size: 13px;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            color: var(--text-main);
-        }
-
-        .booking-side-dot {
-            margin-top: 4px;
-            width: 6px;
-            height: 6px;
-            border-radius: 999px;
-            background: var(--accent);
-        }
-
-        .booking-side-highlight {
-            margin-top: 12px;
-            font-size: 12px;
-            padding: 9px 10px;
-            border-radius: 14px;
-            background: rgba(15, 23, 42, 0.03);
-            border: 1px dashed rgba(148, 163, 184, 0.7);
-            color: var(--text-muted);
-        }
-
-        .booking-side-highlight strong {
-            color: var(--text-main);
-        }
-
-        .trustpilot-inline-link {
-            color: var(--accent);
-            text-decoration: none;
-            border-bottom: 1px dashed transparent;
-        }
-
-        .trustpilot-inline-link:hover {
-            border-bottom-color: var(--accent);
-        }
-
-        @media (max-width: 900px) {
-            .booking-layout {
-                grid-template-columns: minmax(0, 1fr);
-            }
-        }
-
-        @media (max-width: 650px) {
-            .booking-card,
-            .booking-side-card {
-                border-radius: 18px;
-                padding: 16px 14px 18px;
-            }
-
-            .form-row-inline {
-                grid-template-columns: minmax(0, 1fr);
-            }
-        }
-    </style>
-
-    <script src="layout.js" defer></script>
-    <script>
-        // Simpel mailto-opsætning – sender ikke data til server/google sheets endnu
-        document.addEventListener("DOMContentLoaded", () => {
-            const form = document.getElementById("booking-form");
-            if (!form) return;
-
-            form.addEventListener("submit", function (e) {
-                e.preventDefault();
-
-                const firstName = form.firstName.value.trim();
-                const lastName = form.lastName.value.trim();
-                const email = form.email.value.trim();
-                const phone = form.phone.value.trim();
-                const address = form.address.value.trim();
-                const plate = form.plate.value.trim();
-                const packageChoice = form.package.value;
-                const date = form.date.value;
-                const time = form.time.value;
-                const message = form.message.value.trim();
-                const termsAccepted = form.terms.checked;
-
-                if (!termsAccepted) {
-                    alert("Du skal acceptere handelsbetingelserne for at gennemføre booking.");
-                    return;
-                }
-
-                // Simpelt input-tjek – du kan udbygge efter behov
-                if (!firstName || !lastName || !email || !phone || !address || !plate || !packageChoice || !date || !time) {
-                    alert("Udfyld venligst alle obligatoriske felter (markeret med *).");
-                    return;
-                }
-
-                const subject = `Booking – ${packageChoice} – ${plate}`;
-                const bodyLines = [
-                    "Ny bookingforespørgsel fra Daily Autocare hjemmeside:",
-                    "",
-                    `Navn: ${firstName} ${lastName}`,
-                    `E-mail: ${email}`,
-                    `Telefon: ${phone}`,
-                    `Adresse: ${address}`,
-                    `Bilens nummerplade: ${plate}`,
-                    "",
-                    `Valgt pakke: ${packageChoice}`,
-                    `Ønsket dato: ${date}`,
-                    `Ønsket tidspunkt: ${time}`,
-                    "",
-                    "Evt. besked fra kunden:",
-                    message || "(ingen besked angivet)",
-                    "",
-                    "Kunden har accepteret handelsbetingelserne på hjemmesiden."
-                ];
-
-                const mailto = `mailto:kontakt@dailyautocare.dk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
-
-                window.location.href = mailto;
-            });
+          if (addon.type === "qty") {
+            const qtyInput = addonsContainer.querySelector(`input[type="number"][data-addon-id="${id}"]`);
+            const qty = Number(qtyInput?.value || 0);
+            if (!qty || qty < 1) return; // ingen tid før antal er sat
+            minTotal += tMin * qty;
+            maxTotal += tMax * qty;
+          } else {
+            minTotal += tMin;
+            maxTotal += tMax;
+          }
         });
-    </script>
-</head>
-<body>
-<div class="page">
 
+        return { min: minTotal, max: maxTotal };
+      }
+
+      function clearAddonsUI() {
+        addonsContainer.innerHTML = "";
+        addonsTotalEl.textContent = "0";
+        if (packagePriceEl) packagePriceEl.textContent = "0";
+        if (grandTotalEl) grandTotalEl.textContent = "0";
+        if (totalTimeEl) totalTimeEl.textContent = "0 min";
+        addonsWrap.style.display = "none";
+      }
+
+      function buildAddonRow(addon) {
+        const row = document.createElement("div");
+        row.className = "addon-item";
+
+        const left = document.createElement("div");
+        left.className = "addon-left";
+
+        const check = document.createElement("input");
+        check.type = "checkbox";
+        check.id = `addon_${addon.id}`;
+        check.name = `addon_${addon.id}`;
+        check.dataset.addonId = addon.id;
+
+        const textWrap = document.createElement("div");
+        textWrap.className = "addon-text";
+
+        const title = document.createElement("div");
+        title.className = "addon-title";
+        title.textContent = addon.label;
+
+        const price = document.createElement("div");
+        price.className = "addon-price";
+        price.textContent = addon.type === "qty"
+          ? `${addon.price},- pr. ${addon.unitLabel}`
+          : `${addon.price},-`;
+
+        textWrap.appendChild(title);
+        textWrap.appendChild(price);
+
+        left.appendChild(check);
+        left.appendChild(textWrap);
+
+        row.appendChild(left);
+
+        if (addon.type === "qty") {
+          const qtyWrap = document.createElement("div");
+          qtyWrap.className = "addon-qty";
+
+          const qtyLabel = document.createElement("label");
+          qtyLabel.setAttribute("for", `qty_${addon.id}`);
+          qtyLabel.textContent = `Antal ${addon.unitLabel}`;
+
+          const qty = document.createElement("input");
+          qty.type = "number";
+          qty.min = "1";
+          qty.step = "1";
+          qty.inputMode = "numeric";
+          qty.placeholder = "0";
+          qty.id = `qty_${addon.id}`;
+          qty.name = `qty_${addon.id}`;
+          qty.disabled = true;
+          qty.dataset.addonId = addon.id;
+
+          check.addEventListener("change", () => {
+            qty.disabled = !check.checked;
+            if (!check.checked) {
+              qty.value = "";
+            } else {
+              // Sæt default til 1 for bedre UX (viser pris/tid med det samme)
+              if (!qty.value) qty.value = "1";
+            }
+            updateTotals();
+          });
+
+          qty.addEventListener("input", updateTotals);
+
+          qtyWrap.appendChild(qtyLabel);
+          qtyWrap.appendChild(qty);
+
+          row.appendChild(qtyWrap);
+        } else {
+          check.addEventListener("change", updateTotals);
+        }
+
+        return row;
+      }
+
+      function renderAddonsForPackage() {
+        const type = getPackageType(packageSelect.value);
+        clearAddonsUI();
+        if (!type) return;
+
+        const list = getActiveAddonsList();
+        addonsWrap.style.display = "block";
+        list.forEach(addon => addonsContainer.appendChild(buildAddonRow(addon)));
+        updateTotals();
+      }
+
+      function getSelectedAddons() {
+        const activeList = getActiveAddonsList();
+        const byId = Object.fromEntries(activeList.map(a => [a.id, a]));
+
+        const checks = addonsContainer.querySelectorAll('input[type="checkbox"][data-addon-id]');
+        const selected = [];
+        let total = 0;
+
+        checks.forEach(ch => {
+          if (!ch.checked) return;
+
+          const id = ch.dataset.addonId;
+          const addon = byId[id];
+          if (!addon) return;
+
+          if (addon.type === "qty") {
+            const qtyInput = addonsContainer.querySelector(`input[type="number"][data-addon-id="${id}"]`);
+            const qty = Number(qtyInput?.value || 0);
+
+            if (!qty || qty < 1) {
+              selected.push(`${addon.label} – (antal ikke angivet) – ${addon.price},- pr. ${addon.unitLabel}`);
+              return;
+            }
+
+            const lineTotal = addon.price * qty;
+            total += lineTotal;
+            selected.push(`${addon.label} – ${qty} ${addon.unitLabel} á ${addon.price},- = ${formatPrice(lineTotal)},-`);
+          } else {
+            total += addon.price;
+            selected.push(`${addon.label} – ${addon.price},-`);
+          }
+        });
+
+        return { selected, total };
+      }
+
+      function updateTotals() {
+        // Pris
+        const { total: addonsTotal } = getSelectedAddons();
+        const packagePrice = parsePackagePrice(packageSelect.value);
+        const grandTotal = packagePrice + addonsTotal;
+
+        addonsTotalEl.textContent = formatPrice(addonsTotal);
+        if (packagePriceEl) packagePriceEl.textContent = formatPrice(packagePrice);
+        if (grandTotalEl) grandTotalEl.textContent = formatPrice(grandTotal);
+
+        // Tid
+        const pkgTime = getPackageTimeRange();
+        const addonsTime = getSelectedAddonsTimeRange();
+
+        const totalMin = pkgTime.min + addonsTime.min;
+        const totalMax = pkgTime.max + addonsTime.max;
+
+        if (totalTimeEl) totalTimeEl.textContent = formatTimeRange(totalMin, totalMax);
+      }
+
+      packageSelect.addEventListener("change", renderAddonsForPackage);
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const firstName = form.firstName.value.trim();
+        const lastName = form.lastName.value.trim();
+        const email = form.email.value.trim();
+        const phone = form.phone.value.trim();
+        const address = form.address.value.trim();
+        const plate = form.plate.value.trim();
+        const packageChoice = form.package.value;
+        const date = form.date.value;
+        const time = form.time.value;
+        const message = form.message.value.trim();
+        const termsAccepted = form.terms.checked;
+
+        if (!termsAccepted) {
+          alert("Du skal acceptere handelsbetingelserne for at gennemføre booking.");
+          return;
+        }
+
+        if (!firstName || !lastName || !email || !phone || !address || !plate || !packageChoice || !date || !time) {
+          alert("Udfyld venligst alle obligatoriske felter (markeret med *).");
+          return;
+        }
+
+        const { selected: selectedAddons, total: addonsTotal } = getSelectedAddons();
+        const packagePrice = parsePackagePrice(packageChoice);
+        const grandTotal = packagePrice + addonsTotal;
+
+        // Tid til mail
+        const pkgTime = getPackageTimeRange();
+        const addonsTime = getSelectedAddonsTimeRange();
+        const totalMin = pkgTime.min + addonsTime.min;
+        const totalMax = pkgTime.max + addonsTime.max;
+        const timeEstimate = formatTimeRange(totalMin, totalMax);
+
+        const subject = `Booking – ${packageChoice} – ${plate}`;
+
+        const bodyLines = [
+          "Ny bookingforespørgsel fra Daily Autocare hjemmeside:",
+          "",
+          `Navn: ${firstName} ${lastName}`,
+          `E-mail: ${email}`,
+          `Telefon: ${phone}`,
+          `Adresse: ${address}`,
+          `Bilens nummerplade: ${plate}`,
+          "",
+          `Valgt pakke: ${packageChoice}`,
+          `Pakkepris (estimat): ${formatPrice(packagePrice)},-`,
+          "",
+          "Tilvalg:",
+          selectedAddons.length ? `- ${selectedAddons.join("\n- ")}` : "(Ingen tilvalg valgt)",
+          `Tilvalg i alt (estimat): ${formatPrice(addonsTotal)},-`,
+          "",
+          `Tidsforbrug (estimat): ${timeEstimate}`,
+          `Samlet estimat: ${formatPrice(grandTotal)},-`,
+          "",
+          "Evt. besked fra kunden:",
+          message || "(ingen besked angivet)",
+          "",
+          "Kunden har accepteret handelsbetingelserne på hjemmesiden."
+        ];
+
+        const mailto = `mailto:kontakt@dailyautocare.dk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+        window.location.href = mailto;
+      });
+
+      if (packageSelect.value) renderAddonsForPackage();
+    });
+  </script>
+</head>
+
+<body>
+  <div class="page">
     <div id="site-header"></div>
 
     <main>
-        <section class="booking-section">
-            <div class="booking-header">
-                <div class="booking-kicker">Booking</div>
-                <h1>Book klargøring hos Daily Autocare.</h1>
-                <p>
-                    Udfyld formularen herunder for at sende en bookingforespørgsel. Du modtager efterfølgende 
-                    en bekræftelse pr. mail eller telefon, når tidspunktet er endeligt godkendt.
-                </p>
-            </div>
+      <section class="booking-section">
+        <div class="booking-header">
+          <h1>Book klargøring hos Daily Autocare.</h1>
+          <p>
+            Udfyld formularen herunder for at sende en bookingforespørgsel. Du modtager efterfølgende
+            en bekræftelse pr. mail eller telefon, når tidspunktet er endeligt godkendt.
+          </p>
+        </div>
 
-            <div class="booking-layout">
-                <!-- Formular -->
-                <article class="booking-card">
-                    <h2>Bookingformular</h2>
-                    <p>
-                        Oplysningerne bruges til at kunne planlægge og gennemføre din klargøring. 
-                        Felter markeret med * er obligatoriske.
-                    </p>
+        <div class="booking-layout">
+          <article class="booking-card">
+            <h2>Bookingformular</h2>
+            <p>
+              Oplysningerne bruges til at kunne planlægge og gennemføre din klargøring.
+              Felter markeret med * er obligatoriske.
+            </p>
 
-                    <form id="booking-form">
-                        <div class="form-row-inline">
-                            <div>
-                                <label for="firstName">Fornavn *</label>
-                                <input type="text" id="firstName" name="firstName" required>
-                            </div>
-                            <div>
-                                <label for="lastName">Efternavn *</label>
-                                <input type="text" id="lastName" name="lastName" required>
-                            </div>
+            <form id="booking-form">
+              <div class="form-row-inline">
+                <div>
+                  <label for="firstName">Fornavn *</label>
+                  <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div>
+                  <label for="lastName">Efternavn *</label>
+                  <input type="text" id="lastName" name="lastName" required>
+                </div>
+              </div>
+
+              <div class="form-row-inline">
+                <div>
+                  <label for="email">E-mail *</label>
+                  <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                  <label for="phone">Telefon *</label>
+                  <input type="tel" id="phone" name="phone" required>
+                </div>
+              </div>
+
+              <div>
+                <label for="address">Adresse (sted for klargøring) *</label>
+                <input type="text" id="address" name="address" placeholder="F.eks. vejnavn, nr., postnr. og by" required>
+              </div>
+
+              <div class="form-row-inline">
+                <div>
+                  <label for="plate">Bilens nummerplade *</label>
+                  <input type="text" id="plate" name="plate" required>
+                </div>
+
+                <div>
+                  <label for="package">Vælg pakke *</label>
+                  <select id="package" name="package" required>
+                    <option value="">Vælg pakke...</option>
+                    <option value="Interiør (895,-)">Interiør (895,-)</option>
+                    <option value="Eksteriør (795,-)">Eksteriør (795,-)</option>
+                    <option value="Komplet (1.395,-)">Komplet (1.395,-)</option>
+                  </select>
+
+                  <div id="addons-wrap" style="display:none;">
+                    <div class="form-helper">Tilvalg (valgfrit)</div>
+                    <div id="addons-container" class="addons-grid"></div>
+
+                    <div class="summary-box">
+                      <strong>Booking oversigt</strong>
+                      <div class="summary-rows">
+                        <div class="summary-row">
+                          <span>Valgt pakke:</span>
+                          <span><strong><span id="package-price">0</span>,-</strong></span>
                         </div>
-
-                        <div class="form-row-inline">
-                            <div>
-                                <label for="email">E-mail *</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            <div>
-                                <label for="phone">Telefon *</label>
-                                <input type="tel" id="phone" name="phone" required>
-                            </div>
+                        <div class="summary-row">
+                          <span>Tilvalg i alt:</span>
+                          <span><strong><span id="addons-total">0</span>,-</strong></span>
                         </div>
-
-                        <div>
-                            <label for="address">Adresse (sted for klargøring) *</label>
-                            <input type="text" id="address" name="address" placeholder="F.eks. vejnavn, nr., postnr. og by" required>
+                        <div class="summary-row">
+                          <span>Tidsforbrug <span style="font-size: 10px;">(Estimat)</span>:</span>
+                          <span><strong><span id="total-time">0 min</span></strong></span>
                         </div>
+                        <p style="font-size:10px;">(Tidsforbruget er blot et estimat, det kan variere alt efter bilens størrelse, og nivaue af snavs)</p>
+                      </div>
 
-                        <div class="form-row-inline">
-                            <div>
-                                <label for="plate">Bilens nummerplade *</label>
-                                <input type="text" id="plate" name="plate" required>
-                            </div>
-                            <div>
-                                <label for="package">Vælg pakke *</label>
-                                <select id="package" name="package" required>
-                                    <option value="">Vælg pakke...</option>
-                                    <option value="Interiør (899,-)">Interiør (899,-)</option>
-                                    <option value="Eksteriør (799,-)">Eksteriør (799,-)</option>
-                                    <option value="Komplet (1.499,-)">Komplet (1.499,-)</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-row-inline">
-                            <div>
-                                <label for="date">Ønsket dato *</label>
-                                <input type="date" id="date" name="date" required>
-                            </div>
-                            <div>
-                                <label for="time">Ønsket tidspunkt *</label>
-                                <input type="time" id="time" name="time" required>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label for="message">Evt. besked</label>
-                            <textarea id="message" name="message" placeholder="F.eks. bilens stand, særlige ønsker, adgangsforhold mv."></textarea>
-                        </div>
-
-                        <div class="checkbox-row">
-                            <input type="checkbox" id="terms" name="terms" required>
-                            <label for="terms">
-                                Jeg accepterer <a href="vilkaar.html#handelsbetingelser" target="_blank">handelsbetingelserne</a> 
-                                og har læst <a href="vilkaar.html#persondata" target="_blank">persondata- og cookiepolitikken</a>. *
-                            </label>
-                        </div>
-
-                        <div class="form-footer">
-                            <button type="submit" class="CTA-BTN">Send bookingforespørgsel</button>
-                            <span>
-                                Alternativt kan du skrive til <strong>kontakt@dailyautocare.dk</strong> 
-                                eller ringe på <strong>(+45) 25 70 59 15</strong>.
-                            </span>
-                            <span>
-                                Tryg booking – 
-                                <a href="https://dk.trustpilot.com/review/DIT-TRUSTPILOT-LINK" target="_blank" class="trustpilot-inline-link">
-                                    læs hvad andre kunder siger på Trustpilot
-                                </a>.
-                            </span>
-                        </div>
-                    </form>
-                </article>
-
-                <!-- Info / forventningsafstemning -->
-                <article class="booking-side-card">
-                    <h2>Hvad sker der efter du har sendt din booking?</h2>
-                    <p>
-                        Når du sender formularen, oprettes din forespørgsel som en mail til Daily Autocare. 
-                        Der er først tale om en endelig booking, når du har modtaget en bekræftelse.
-                    </p>
-
-                    <ul class="booking-side-list">
-                        <li>
-                            <span class="booking-side-dot"></span>
-                            <span>
-                                <strong>1. Vi gennemgår din forespørgsel</strong><br>
-                                Dato, tidspunkt og adresse gennemgås i forhold til kalenderen.
-                            </span>
-                        </li>
-                        <li>
-                            <span class="booking-side-dot"></span>
-                            <span>
-                                <strong>2. Du modtager bekræftelse eller forslag</strong><br>
-                                Du får en bekræftelse på mail/telefon – eller et alternativt forslag, hvis ønsket tid ikke er ledig.
-                            </span>
-                        </li>
-                        <li>
-                            <span class="booking-side-dot"></span>
-                            <span>
-                                <strong>3. Klargøringen udføres efter aftale</strong><br>
-                                Vi møder op på den aftalte adresse og udfører den valgte pakke.
-                            </span>
-                        </li>
-                    </ul>
-
-                    <div class="booking-side-highlight">
-                        <strong>Om kalender og Google Sheets:</strong><br>
-                        På sigt kan bookingkalenderen kobles til fx Google Sheets/Google Calendar, 
-                        så optagede tider ikke kan vælges på siden. Det kræver dog lidt ekstra opsætning 
-                        med scripting eller en mindre backend-løsning.
+                      <div class="summary-total">
+                        <span>Total: </span>
+                        <span><strong><span id="grand-total">0</span>,-</strong></span>
+                      </div>
                     </div>
-                </article>
-            </div>
-        </section>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row-inline">
+                <div>
+                  <label for="date">Ønsket dato *</label>
+                  <input type="date" id="date" name="date" required>
+                </div>
+                <div>
+                  <label for="time">Ønsket tidspunkt *</label>
+                  <input type="time" id="time" name="time" required>
+                </div>
+              </div>
+
+              <div>
+                <label for="message">Evt. besked</label>
+                <textarea id="message" name="message" placeholder="F.eks. bilens stand, særlige ønsker, adgangsforhold mv."></textarea>
+              </div>
+
+              <div class="checkbox-row">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">
+                  Jeg accepterer <a href="vilkaar.html#handelsbetingelser" target="_blank">handelsbetingelserne</a>
+                  og har læst <a href="vilkaar.html#persondata" target="_blank">persondata- og cookiepolitikken</a>. *
+                </label>
+              </div>
+
+              <div class="form-footer">
+                <button type="submit" class="CTA-BTN">Send bookingforespørgsel</button>
+                <span>
+                  Alternativt kan du skrive til <strong>kontakt@dailyautocare.dk</strong>
+                  eller ringe på <strong>(+45) 25 70 59 15</strong>.
+                </span>
+                <span>
+                  Tryg booking –
+                  <a href="https://dk.trustpilot.com/review/DIT-TRUSTPILOT-LINK" target="_blank" class="trustpilot-inline-link">
+                    læs hvad andre kunder siger på Trustpilot
+                  </a>.
+                </span>
+              </div>
+            </form>
+          </article>
+
+          <article class="booking-side-card">
+            <h2>Hvad sker der efter du har sendt din booking?</h2>
+            <p>
+              Når du sender formularen, oprettes din forespørgsel som en mail til Daily Autocare.
+              Der er først tale om en endelig booking, når du har modtaget en bekræftelse.
+            </p>
+
+            <ul class="booking-side-list">
+              <li>
+                <span class="booking-side-dot"></span>
+                <span>
+                  <strong>1. Vi gennemgår din forespørgsel</strong><br>
+                  Dato, tidspunkt og adresse gennemgås i forhold til kalenderen.
+                </span>
+              </li>
+              <li>
+                <span class="booking-side-dot"></span>
+                <span>
+                  <strong>2. Du modtager bekræftelse eller forslag</strong><br>
+                  Du får en bekræftelse på mail/telefon – eller et alternativt forslag, hvis ønsket tid ikke er ledig.
+                </span>
+              </li>
+              <li>
+                <span class="booking-side-dot"></span>
+                <span>
+                  <strong>3. Klargøringen udføres efter aftale</strong><br>
+                  Vi møder op på den aftalte adresse og udfører den ønskede service.
+                </span>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
     </main>
 
     <div id="site-footer"></div>
-</div>
+  </div>
 </body>
 </html>
