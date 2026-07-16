@@ -1,36 +1,35 @@
 {
     "interiør_lille": 499,
     "eksteriør_lille": 349,
-    "komplet_lille": 699,
+    "komplet_lille": 749,
 
     "interiør_person": 599,
     "eksteriør_person": 449,
-    "komplet_person": 899,
+    "komplet_person": 949,
 
     "interiør_stor": 699,
     "eksteriør_stor": 549,
-    "komplet_stor": 1099,
+    "komplet_stor": 1149,
 
     "interiør_van": 799,
     "eksteriør_van": 649,
-    "komplet_van": 1299,
-
+    "komplet_van": 1349,
 
     "interiørplus_lille": 599,
     "eksteriørplus_lille": 449,
-    "kompletplus_lille": 899,
+    "kompletplus_lille": 849,
 
     "interiørplus_person": 699,
     "eksteriørplus_person": 549,
-    "kompletplus_person": 1099,
+    "kompletplus_person": 1149,
 
     "interiørplus_stor": 799,
     "eksteriørplus_stor": 649,
-    "kompletplus_stor": 1299,
+    "kompletplus_stor": 1349,
 
     "interiørplus_van": 899,
     "eksteriørplus_van": 749,
-    "kompletplus_van": 1499,
+    "kompletplus_van": 1549,
 
 
     "ekstra": 349,
