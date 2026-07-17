@@ -8,7 +8,7 @@
 <meta property="og:title" content="Kontakt — Daily Autocare">
 <meta property="og:description" content="Book din mobile bilpleje på Djursland. Vi svarer hurtigt.">
 <meta property="og:type" content="website">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/svg+xml" href="/logo_hv.webp">
 
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
@@ -38,7 +38,7 @@
         <li><a href="./galleri.html">Galleri</a></li>
         <li><a href="./om-os.html">Om os</a></li>
         <li><a href="./kontakt.html" aria-current="page">Kontakt</a></li>
-        <li class="nav-cta"><a href="./kontakt.html" class="btn btn-primary" style="color: white;">Book en tid</a></li>
+        <li class="nav-cta"><a href="./book.html" class="btn btn-primary" style="color: white;">Book en tid</a></li>
       </ul>
     </nav>
     <!--<div class="header-actions">
@@ -56,8 +56,8 @@
     <div class="container">
       <div class="breadcrumb"><a href="./index.html">Forside</a> <span>/</span> <span>Kontakt</span></div>
       <span class="section-eyebrow">Kontakt</span>
-      <h1>Lad os booke en tid til din bil</h1>
-      <p>Skriv til os via formularen, send en mail eller ring — vi svarer hurtigst muligt og finder en tid, der passer dig.</p>
+      <h1>Finder du ikke det du søger? Kontakt os her</h1>
+      <p>Skriv til os via formularen, send en mail eller ring — vi svarer hurtigst muligt med svar på dine spørgsmål</p>
     </div>
   </section>
 
@@ -74,38 +74,14 @@
                 <label for="navn">Navn</label>
                 <input type="text" id="navn" name="navn" autocomplete="name" required>
               </div>
-              <div class="form-field">
-                <label for="telefon">Telefon</label>
-                <input type="tel" id="telefon" name="telefon" autocomplete="tel" required>
-              </div>
             </div>
             <div class="form-field">
               <label for="email">E-mail</label>
               <input type="email" id="email" name="email" autocomplete="email" required>
             </div>
-            <div class="form-row">
-              <div class="form-field">
-                <label for="bilstoerrelse">Bilstørrelse</label>
-                <select id="bilstoerrelse" name="bilstoerrelse">
-                  <option value="Lille bil">Lille bil</option>
-                  <option value="Personbil">Personbil</option>
-                  <option value="SUV / Stor bil">SUV / Stor bil</option>
-                  <option value="7-personers / Van">7-personers / Van</option>
-                </select>
-              </div>
-              <div class="form-field">
-                <label for="pakke">Ønsket pakke</label>
-                <select id="pakke" name="pakke">
-                  <option value="Interiør">Interiør</option>
-                  <option value="Eksteriør">Eksteriør</option>
-                  <option value="Komplet klargøring">Komplet klargøring</option>
-                  <option value="Ved ikke endnu">Ved ikke endnu</option>
-                </select>
-              </div>
-            </div>
             <div class="form-field">
               <label for="besked">Besked</label>
-              <textarea id="besked" name="besked" rows="4" placeholder="Fortæl os gerne om bilens stand, adresse og ønsket tidspunkt"></textarea>
+              <textarea id="besked" name="besked" rows="4" placeholder="Hvad har du på hjerte?" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary btn-lg btn-block">
               Send forespørgsel
@@ -172,6 +148,22 @@
           <summary>Hvor langt kører I ud på Djursland?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></summary>
           <p>Vi dækker hele Djursland fra vores hovedsæde i Trustrup-Lyngby. Er du i tvivl om din adresse, så skriv til os — vi finder en løsning.</p>
         </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="section section--tight">
+    <div class="container">
+      <div class="cta-band" data-reveal>
+        <div class="cta-band-text">
+          <h2>Lad os tage os af din bil</h2>
+          <p>Book en tid, og oplev forskellen på rigtig bilpleje.</p>
+        </div>
+        <div class="btn-group">
+          <a href="./priser.html" class="btn btn-secondary btn-lg">Se priser</a>
+          <a href="./book.html" class="btn btn-primary btn-lg">Book en tid</a>
+        </div>
       </div>
     </div>
   </section>
