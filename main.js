@@ -176,21 +176,84 @@
       e.preventDefault();
       var name = contactForm.querySelector('#navn');
       var email = contactForm.querySelector('#email');
-      var phone = contactForm.querySelector('#telefon');
-      var carSize = contactForm.querySelector('#bilstoerrelse');
-      var packageSel = contactForm.querySelector('#pakke');
       var message = contactForm.querySelector('#besked');
 
       var bodyLines = [
         'Navn: ' + (name ? name.value : ''),
-        'Telefon: ' + (phone ? phone.value : ''),
         'E-mail: ' + (email ? email.value : ''),
-        'Bilstørrelse: ' + (carSize ? carSize.value : ''),
-        'Ønsket pakke: ' + (packageSel ? packageSel.value : ''),
         '',
         (message ? message.value : '')
       ];
       var subject = encodeURIComponent('Forespørgsel fra hjemmesiden — ' + (name ? name.value : ''));
+      var body = encodeURIComponent(bodyLines.join('\n'));
+      window.location.href = 'mailto:kontakt@dailyautocare.dk?subject=' + subject + '&body=' + body;
+
+      var success = document.querySelector('[data-form-success]');
+      if (success) success.classList.add('is-visible');
+    });
+  }
+
+    /* ---------- Booking form ---------- */
+  var bookingForm = document.querySelector('[data-booking-form]');
+  if (bookingForm) {
+    bookingForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var firstname = bookingForm.querySelector('#fornavn');
+      var lastname = bookingForm.querySelector('#efternavn');
+      var companyname = bookingForm.querySelector('#firmanavn');
+      var email = bookingForm.querySelector('#email');
+      var phone = bookingForm.querySelector('#telefon');
+      var street = bookingForm.querySelector('#vejnavn');
+      var housenumber = bookingForm.querySelector('#husnummer');
+      var postal = bookingForm.querySelector('#postnummer');
+      var city = bookingForm.querySelector('#bynavn');
+      var carmodel = bookingForm.querySelector('#bilmodel');
+      var pakke = bookingForm.querySelector('#pakke');
+      var ekstra = bookingForm.querySelector('#ekstra');
+      var rensstof = bookingForm.querySelector('#rensstofsæder');
+      var renslæder = bookingForm.querySelector('#renslædersæder');
+      var coatingforrude = bookingForm.querySelector('#coatingforrude');
+      var tekstilimprægnering = bookingForm.querySelector('#tekstilimprægnering');
+      var message = bookingForm.querySelector('#besked');
+
+      var tilvalg = [];
+      if (ekstra && ekstra.checked) tilvalg.push(' - ' + ekstra.value);
+      if (rensstof && rensstof.checked) tilvalg.push(' - ' + rensstof.value);
+      if (renslæder && renslæder.checked) tilvalg.push(' - ' + renslæder.value);
+      if (coatingforrude && coatingforrude.checked) tilvalg.push(' - ' + coatingforrude.value);
+      if (tekstilimprægnering && tekstilimprægnering.checked) tilvalg.push(' - ' + tekstilimprægnering.value);
+
+      var bodyLines = [
+        'Fornavn: ' + (firstname ? firstname.value : ''),
+        'Efternavn: ' + (lastname ? lastname.value : ''),
+        'Firmanavn: ' + (companyname ? companyname.value : ''),
+        'E-mail: ' + (email ? email.value : ''),
+        'Telefon: ' + (phone ? phone.value : ''),
+        '',
+        'Adresse: ' +
+          (street ? street.value : '') + ' ' +
+          (housenumber ? housenumber.value : '') + ', ' +
+          (postal ? postal.value : '') + ' ' +
+          (city ? city.value : ''),
+        '',
+        'Bilmodel: ' + (carmodel ? carmodel.value : ''),
+        '',
+        'Pakke: ' + (pakke ? pakke.value : ''),
+        ''
+      ];
+
+      if (tilvalg.length) {
+        bodyLines.push('Tilvalg:');
+        bodyLines.push.apply(bodyLines, tilvalg);
+        bodyLines.push('');
+      }
+
+      bodyLines.push(
+        'Besked:',
+        (message ? message.value : '')
+      );
+
+      var subject = encodeURIComponent('Ny booking fra hjemmesiden — ' + (firstname ? firstname.value : ''));
       var body = encodeURIComponent(bodyLines.join('\n'));
       window.location.href = 'mailto:kontakt@dailyautocare.dk?subject=' + subject + '&body=' + body;
 
