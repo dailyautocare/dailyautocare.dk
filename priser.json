@@ -1,38 +1,30 @@
 {
-    "interiør_lille": 499,
-    "eksteriør_lille": 349,
-    "komplet_lille": 749,
+    "interiør_lille": 599,
+    "eksteriør_lille": 449,
+    "komplet_lille": 949,
 
-    "interiør_person": 599,
-    "eksteriør_person": 449,
-    "komplet_person": 949,
-
-    "interiør_stor": 699,
-    "eksteriør_stor": 549,
-    "komplet_stor": 1149,
+    "interiør_person": 699,
+    "eksteriør_person": 549,
+    "komplet_person": 1149,
 
     "interiør_van": 799,
     "eksteriør_van": 649,
-    "komplet_van": 1349,
+    "komplet_van": 1349
 
-    "interiørplus_lille": 599,
-    "eksteriørplus_lille": 449,
-    "kompletplus_lille": 949,
+    "interiørplus_lille": 699,
+    "eksteriørplus_lille": 549,
+    "kompletplus_lille": 1149,
 
-    "interiørplus_person": 699,
-    "eksteriørplus_person": 549,
-    "kompletplus_person": 1149,
-
-    "interiørplus_stor": 799,
-    "eksteriørplus_stor": 649,
-    "kompletplus_stor": 1349,
+    "interiørplus_person": 799,
+    "eksteriørplus_person": 649,
+    "kompletplus_person": 1349,
 
     "interiørplus_van": 899,
     "eksteriørplus_van": 749,
     "kompletplus_van": 1549,
 
 
-    "ekstra": 349,
+    "ekstra": 249,
     "rensstofsæder": 79,
     "renslædersæder": 99,
     "coatingforrude": 449,
